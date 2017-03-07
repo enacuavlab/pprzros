@@ -1,0 +1,3 @@
+[submodule "pprzlink"]
+	path = pprzlink
+	url = git@github.com:enacuavlab/pprzlink
