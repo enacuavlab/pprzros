@@ -1,0 +1,1677 @@
+<?xml version="1.0"?>
+<!DOCTYPE protocol SYSTEM "messages.dtd">
+<protocol>
+    <msg_class name="ROS">
+        <message name="TEST_ACTION" id="1">
+            <field name="TEST_ACTION_GOAL" type="m_TEST_ACTION_GOAL"></field>
+            <field name="TEST_ACTION_RESULT" type="m_TEST_ACTION_RESULT"></field>
+            <field name="TEST_ACTION_FEEDBACK" type="m_TEST_ACTION_FEEDBACK"></field>
+        </message>
+        
+        <message name="TEST_ACTION_FEEDBACK" id="2">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_STATUS" type="m_GOAL_STATUS"></field>
+            <field name="TEST_FEEDBACK" type="m_TEST_FEEDBACK"></field>
+        </message>
+        
+        <message name="TEST_ACTION_GOAL" id="3">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_TEST_GOAL"></field>
+        </message>
+
+        <message name="TEST_ACTION_RESULT" id="4">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_TEST_RESULT"></field>
+        </message>
+
+        <message name="TEST_FEEDBACK" id="5">
+            <field name="FEEDBACK" type="int32"></field>
+        </message>
+
+        <message name="TEST_GOAL" id="6">
+            <field name="GOAL" type="int32"></field>
+        </message>
+
+        <message name="TEST_REQUEST_ACTION" id="7">
+            <field name="ACTION_GOAL" type="m_TEST_REQUEST_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_TEST_REQUEST_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_TEST_REQUEST_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="TEST_REQUEST_ACTION_FEEDBACK" id="8">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_TEST_REQUEST_FEEDBACK"></field>
+        </message>
+
+        <message name="TEST_REQUEST_ACTION_GOAL" id="9">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_TEST_REQUEST_GOAL"></field>
+        </message>
+
+        <message name="TEST_REQUEST_ACTION_RESULT" id="10">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_RESULT"></field>
+        </message>
+
+        <message name="TEST_REQUEST_FEEDBACK" id="11"></message>
+
+        <message name="TEST_TEST_REQUEST_GOAL" id="12">
+            <field name="TERMINATE_STATUS" type="int32"></field>
+            <field name="IGNORE_CANCEL" type="bool"></field>
+            <field name="RESULT_TEXT" type="string"></field>
+            <field name="THE_RESULT" type="int32"></field>
+            <field name="IS_SIMPLE_CLIENT" type="bool"></field>
+            <field name="DELAY_ACCEPT" type="m_DURATION"></field>
+            <field name="DELAY_TERMINATE" type="m_DURATION"></field>
+            <field name="PAUSE_STATUS" type="m_DURATION"></field>
+        </message>
+
+        <message name="TEST_REQUEST_RESULT" id="13">
+            <field name="THE_RESULT" type="int32"></field>
+            <field name="IS_SIMPLE_SERVER" type="bool"></field>
+        </message>
+
+        <message name="TEST_RESULT" id="14">
+            <field name="RESULT" type="int32"></field>
+        </message>
+
+        <message name="TWO_INTS_ACTION" id="15">
+            <field name="ACTION_GOAL" type="m_TWO_INTS_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_TWO_INTS_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_TWO_INTS_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="TWO_INTS_ACTION_FEEDBACK" id="16">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_TWO_INTS_FEEDBACK"></field>
+        </message>
+
+        <message name="TWO_INTS_ACTION_GOAL" id="17">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="FEEDBACK" type="m_TWO_INTS_GOAL"></field>
+        </message>
+
+        <message name="TWO_INTS_ACTION_RESULT" id="18">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_TWO_INTS_RESULT"></field>
+        </message>
+
+        <message name="TWO_INTS_FEEDBACK" id="19"></message>
+
+        <message name="TWO_INTS_GOAL" id="20">
+            <field name="A" type="int64"></field>
+            <field name="B" type="int64"></field>
+        </message>
+
+        <message name="TWO_INTS_RESULT" id="21">
+            <field name="SUM" type="int64"></field>
+        </message>
+
+        <message name="GOAL_ID" id="22">
+            <field name="STAMP" type="m_TIME"></field>
+            <field name="ID" type="string"></field>
+        </message>
+
+        <message name="GOAL_STATUS" id="23">
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="STATUS" type="uint8"></field>
+            <field name="TEXT" type="string"></field>
+        </message>
+
+        <message name="GOAL_STATUS_ARRAY" id="24">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS_LIST" type="m_GOAL_STATUS[]"></field>
+        </message>
+
+        <message name="AVERAGING_ACTION" id="25">
+            <field name="ACTION_GOAL" type="m_AVERAGING_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_AVERAGING_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_AVERAGING_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="AVERAGING_ACTION_FEEDBACK" id="26">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_AVERAGING_FEEDBACK"></field>
+        </message>
+
+        <message name="AVERAGING_ACTION_GOAL" id="27">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_AVERAGING_GOAL"></field>
+        </message>
+
+        <message name="AVERAGING_ACTION_RESULT" id="28">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_AVERAGING_RESULT"></field>
+        </message>
+
+        <message name="AVERAGING_FEEDBACK" id="29">
+            <field name="SAME" type="int32"></field>
+            <field name="DATA" type="float32"></field>
+            <field name="MEAN" type="float32"></field>
+            <field name="STD_DEV" type="float32"></field>
+        </message>
+
+        <message name="AVERAGING_GOAL" id="30">
+            <field name="SAMPLES" type="int32"></field>
+        </message>
+
+        <message name="AVERAGING_RESULT" id="31">
+            <field name="MEAN" type="float32"></field>
+            <field name="STD_DEV" type="float32"></field>
+        </message>
+
+        <message name="FIBONACCI_ACTION" id="32">
+            <field name="ACTION_GOAL" type="m_FIBONACCI_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_FIBONACCI_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_FIBONACCI_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="FIBONACCI_ACTION_FEEDBACK" id="33">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_FIBONACCI_FEEDBACK"></field>
+        </message>
+
+        <message name="FIBONACCI_ACTION_GOAL" id="34">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_FIBONACCI_GOAL"></field>
+        </message>
+
+        <message name="FIBONACCI_ACTION_RESULT" id="35">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_FIBONACCI_RESULT"></field>
+        </message>
+
+        <message name="FIBONACCI_FEEDBACK" id="36">
+            <field name="SEQUENCE" type="int32[]"></field>
+        </message>
+
+        <message name="FIBONACCI_GOAL" id="37">
+            <field name="ORDER" type="int32"></field>
+        </message>
+
+        <message name="FIBONACCI_RESULT" id="38">
+            <field name="SEQUENCE" type="int32[]"></field>
+        </message>
+
+        <message name="CONSTANTS" id="39">
+            <field name="DEAD_PUBLISH_PERIOD" type="float32" values="0.05"></field>
+            <field name="DEFAULT_CONNECT_TIMEOUT" type="float32" values="10.0"></field>
+            <field name="DEFAULT_HEARTBEAT_TIMEOUT" type="float32" values="4.0"></field>
+            <field name="DEFAULT_DISCONNECT_TIMEOUT" type="float32" values="2.0"></field>
+            <field name="DEFAULT_HEARTBEAT_PERIOD" type="float32" values="1.0"></field>
+            <field name="DISABLE_HEARTBEAT_TIMEOUT_PARAM" type="string" values="/bond_disable_heartbeat_timeout"></field>
+        </message>
+
+        <message name="STATUS" id="40">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ID" type="string"></field>
+            <field name="INSTANCE_ID" type="string"></field>
+            <field name="ACTIVE" type="bool"></field>
+            <field name="HEARTBEAT_TIMEOUT" type="float32"></field>
+            <field name="HEARTBEAT_PERIOD" type="float32"></field>
+        </message>
+
+        <message name="FOLLOW_JOINT_TRAJECTORY_ACTION" id="41">
+            <field name="ACTION_GOAL" type="m_FOLLOW_JOINT_TRAJECTORY_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_FOLLOW_JOINT_TRAJECTORY_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_FOLLOW_JOINT_TRAJECTORY_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="FOLLOW_JOINT_TRAJECTORY_ACTION_FEEDBACK" id="42">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_FOLLOW_JOINT_TRAJECTORY_FEEDBACK"></field>
+        </message>
+
+        <message name="FOLLOW_JOINT_TRAJECTORY_ACTION_GOAL" id="43">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_FOLLOW_JOINT_TRAJECTORY_GOAL"></field>
+        </message>
+
+        <message name="FOLLOW_JOINT_TRAJECTORY_ACTION_RESULT" id="44">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_FOLLOW_JOINT_TRAJECTORY_RESULT"></field>
+        </message>
+
+        <message name="FOLLOW_JOINT_TRAJECTORY_FEEDBACK" id="45">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="JOINT_NAMES" type="string[]"></field>
+            <field name="DESIRED" type="m_JOINT_TRAJECTORY_POINT"></field>
+            <field name="ACTUAL" type="m_JOINT_TRAJECTORY_POINT"></field>
+            <field name="ERROR" type="m_JOINT_TRAJECTORY_POINT"></field>
+        </message>
+
+        <message name="FOLLOW_JOINT_TRAJECTORY_GOAL" id="46">
+            <field name="TRAJECTORY" type="m_JOINT_TRAJECTORY"></field>
+            <field name="PATH_TOLERANCE" type="m_JOINT_TOLERANCE[]"></field>
+            <field name="GOAL_TOLERANCE" type="m_JOINT_TOLERANCE[]"></field>
+            <field name="GOAL_TIME_TOLERANCE" type="m_DURATION"></field>
+        </message>
+
+        <message name="FOLLOW_JOINT_TRAJECTORY_RESULT" id="47">
+            <field name="ERROR_CODE" type="int32"></field>
+            <field name="ERROR_STRING" type="string"></field>
+        </message>
+
+        <message name="GRIPPER_COMMAND" id="48">
+            <field name="POSITION" type="float64"></field>
+            <field name="MAX_EFFORT" type="float64"></field>
+        </message>
+
+        <message name="GRIPPER_COMMAND_ACTION" id="49">
+            <field name="ACTION_GOAL" type="m_GRIPPER_COMMAND_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_GRIPPER_COMMAND_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_GRIPPER_COMMAND_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="GRIPPER_COMMAND_ACTION_FEEDBACK" id="50">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_GRIPPER_COMMAND_FEEDBACK"></field>
+        </message>
+
+        <message name="GRIPPER_COMMAND_ACTION_GOAL" id="51">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"> </field>
+            <field name="GOAL" type="m_GRIPPER_COMMAND_GOAL"></field>
+        </message>
+
+        <message name="GRIPPER_COMMAND_ACTION_RESULT" id="52">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_GRIPPER_COMMAND_RESULT"></field>
+        </message>
+
+        <message name="GRIPPER_COMMAND_FEEDBACK" id="53">
+            <field name="POSITION" type="float64"></field>
+            <field name="EFFORT" type="float64"></field>
+            <field name="STALLED" type="bool"></field>
+            <field name="REACHED_GOAL" type="bool"></field>
+        </message>
+
+        <message name="GRIPPER_COMMAND_GOAL" id="54">
+            <field name="COMMAND" type="m_GRIPPER_COMMAND"></field>
+        </message>
+
+        <message name="GRIPPER_COMMAND_RESULT" id="55">
+            <field name="POSITION" type="float64"></field>
+            <field name="EFFORT" type="float64"></field>
+            <field name="STALLED" type="bool"></field>
+            <field name="REACHED_GOAL" type="bool"></field>
+        </message>
+
+        <message name="JOINT_CONTROLLER_STATE" id="56">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="SET_POINT" type="float64"></field>
+            <field name="PROCESS_VALUE" type="float64"></field>
+            <field name="PROCESS_VALUE_DOT" type="float64"></field>
+            <field name="ERROR" type="float64"></field>
+            <field name="TIME_STEP" type="float64"></field>
+            <field name="COMMAND" type="float64"></field>
+            <field name="P" type="float64"></field>
+            <field name="I" type="float64"></field>
+            <field name="D" type="float64"></field>
+            <field name="I_CLAMP" type="float64"></field>
+        </message>
+
+        <message name="JOINT_TOLERANCE" id="57">
+            <field name="NAME" type="string"></field>
+            <field name="POSITION" type="float64"></field>
+            <field name="VELOCITY" type="float64"></field>
+            <field name="ACCELERATION" type="float64"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY_ACTION" id="58">
+            <field name="ACTION_GOAL" type="m_JOINT_TRAJECTORY_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_JOINT_TRAJECTORY_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_JOINT_TRAJECTORY_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY_ACTION_FEEDBACK" id="59">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_JOINT_TRAJECTORY_FEEDBACK"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY_ACTION_GOAL" id="60">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_JOINT_TRAJECTORY_GOAL"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY_ACTION_RESULT" id="61">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_JOINT_TRAJECTORY_RESULT"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY_CONTROLLER_STATE" id="62">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="JOINT_NAMES" type="string[]"></field>
+            <field name="DESIRED" type="m_JOINT_TRAJECTORY_POINT"></field>
+            <field name="ACTUAL" type="m_JOINT_TRAJECTORY_POINT"></field>
+            <field name="ERROR" type="m_JOINT_TRAJECTORY_POINT"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY_FEEDBACK" id="63"></message>
+
+        <message name="JOINT_TRAJECTORY_GOAL" id="64">
+            <field name="TRAJECTORY" type="m_JOINT_TRAJECTORY"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY_RESULT" id="65"></message>
+
+        <message name="POINT_HEAD_ACTION" id="66">
+            <field name="ACTION_GOAL" type="m_POINT_HEAD_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_POINT_HEAD_ACTION_RESULT"></field>
+            <field name="ACTIONE_FEEDBACK" type="m_POINT_HEAD_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="POINT_HEAD_ACTION_FEEDBACK" id="67">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_POINT_HEAD_FEEDBACK"></field>
+        </message>
+
+        <message name="POINT_HEAD_ACTION_GOAL" id="68">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_POINT_HEAD_GOAL"></field>
+        </message>
+
+        <message name="POINT_HEAD_ACTION_RESULT" id="69">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_POINT_HEAD_RESULT"></field>
+        </message>
+
+        <message name="POINT_HEAD_FEEDBACK" id="70">
+            <field name="POINTING_ANGLE_ERROR" type="float64"></field>
+        </message>
+
+        <message name="POINT_HEAD_GOAL" id="71">
+            <field name="TARGET" type="m_POINT_STAMPED"></field>
+            <field name="POINTING_AXIS" type="m_VECTOR_3"></field>
+            <field name="POINTING_FRAME" type="string"></field>
+            <field name="MIN_DURATION" type="m_DURATION"></field>
+            <field name="MAX_VELOCITY" type="float64"></field>
+        </message>
+
+        <message name="POINT_HEAD_RESULT" id="72"></message>
+
+        <message name="SINGLE_JOINT_POSITION_ACTION" id="73">
+            <field name="ACTION_GOAL" type="m_SINGLE_JOINT_POSITION_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_SINGLE_JOINT_POSITION_ACTION_RESULT"></field>
+            <field name="ACTIONE_FEEDBACK" type="m_SINGLE_JOINT_POSITION_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="SINGLE_JOINT_POSITION_ACTION_FEEDBACK" id="74">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_SINGLE_JOINT_POSITION_FEEDBACK"></field>
+        </message>
+
+        <message name="SINGLE_JOINT_POSITION_ACTION_GOAL" id="75">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_SINGLE_JOINT_POSITION_GOAL"></field>
+        </message>
+
+        <message name="SINGLE_JOINT_POSITION_ACTION_RESULT" id="76">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_SINGLE_JOINT_POSITION_RESULT"></field>
+        </message>
+
+        <message name="SINGLE_JOINT_POSITION_FEEDBACK" id="77">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POSITION" type="float64"></field>
+            <field name="VELOCITY" type="float64"></field>
+            <field name="ERROR" type="float64"></field>
+        </message>
+
+        <message name="SINGLE_JOINT_POSITION_GOAL" id="78">
+            <field name="POSITION" type="float64"></field>
+            <field name="MIN_DURATION" type="m_DURATION"></field>
+            <field name="MAX_VELOCITY" type="float64"></field>
+        </message>
+
+        <message name="SINGLE_JOINT_POSITION_RESULT" id="79"></message>
+
+        <message name="CONTROLLER_STATE" id="80">
+            <field name="NAME" type="string"></field>
+            <field name="STATE" type="string"></field>
+            <field name="TYPE" type="string"></field>
+            <field name="HARDWARE_INTERFACE" type="string"></field>
+            <field name="RESOURCES" type="string[]"></field>
+        </message>
+
+        <message name="CONTROLLER_STATISTICS" id="81">
+            <field name="NAME" type="string"></field>
+            <field name="TYPE" type="string"></field>
+            <field name="TIMESTAMP" type="m_TIME"></field>
+            <field name="RUNNING" type="bool"></field>
+            <field name="MAX_TIME" type="m_DURATION"></field>
+            <field name="MEAN_TIME" type="m_DURATION"></field>
+            <field name="VARIANCE_TIME" type="m_DURATION"></field>
+            <field name="NUM_CONTROL_LOOP_OVERRUNS" type="int32"></field>
+            <field name="TIME_LAST_CONTROL_LOOP_OVERRUN" type="m_TIME"></field>
+        </message>
+
+        <message name="CONTROLLERS_STATISTICS" id="82">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="CONTROLLER" type="m_CONTROLLER_STATISTICS"></field>
+        </message>
+
+        <message name="DIAGNOSTIC_ARRAY" id="83">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_DIAGNOSTIC_STATUS[]"></field>
+        </message>
+
+        <message name="DIAGNOSTIC_STATUS" id="84">
+            <field name="LEVEL" type="m_BYTE"></field>
+            <field name="NAME" type="string"></field>
+            <field name="MESSAGE" type="string"></field>
+            <field name="HARDWARE_ID" type="string"></field>
+            <field name="VALUES" type="m_KEY_VALUE[]"></field>
+        </message>
+
+        <message name="KEY_VALUE" id="85">
+            <field name="KEY" type="string"></field>
+            <field name="VALUE" type="string"></field>
+        </message>
+
+        <message name="CONFIG_STRING" id="86">
+            <field name="NAME" type="string"></field>
+            <field name="VALUE" type="string"></field>
+        </message>
+
+        <message name="CONFIG_VALUE" id="87">
+            <field name="NAME" type="string"></field>
+            <field name="VALUE" type="float64"></field>
+        </message>
+
+        <message name="SENSOR_LEVELS" id="88">
+            <field name="RECONFIGURE_CLOSE" type="m_BYTE" values="3"></field>
+            <field name="RECONFIGURE_STOP" type="m_BYTE" values="1"></field>
+            <field name="RECONFIGURE_RUNNING" type="m_BYTE" values="0"></field>
+        </message>
+
+        <message name="BOOL_PARAMETER" id="89">
+            <field name="NAME" type="string"></field>
+            <field name="VALUE" type="bool"></field>
+        </message>
+
+        <message name="CONFIG" id="90">
+            <field name="BOOLS" type="m_BOOL_PARAMETER[]"></field>
+            <field name="INTS" type="m_INT_PARAMETER[]"></field>
+            <field name="STRS" type="m_STR_PARAMETER[]"></field>
+            <field name="DOUBLES" type="m_DOUBLE_PARAMETER[]"></field>
+            <field name="GROUPS" type="m_GROUP_STATE[]"></field>
+        </message>
+
+        <message name="CONFIG_DESCRIPTION" id="91">
+            <field name="GROUPS" type="m_GROUP[]"></field>
+            <field name="MAX" type="m_CONFIG"></field>
+            <field name="MIN" type="m_CONFIG"></field>
+            <field name="DFLT" type="m_CONFIG"></field>
+        </message>
+
+        <message name="DOUBLE_PARAMETER" id="92">
+            <field name="NAME" type="string"></field>
+            <field name="VALUE" type="float64"></field>
+        </message>
+
+        <message name="GROUP" id="93">
+            <field name="NAME" type="string"></field>
+            <field name="TYPE" type="string"></field>
+            <field name="PARAMETERS" type="m_PARAM_DESCRIPTION[]"></field>
+            <field name="PARENT" type="int32"></field>
+            <field name="ID" type="int32"></field>
+        </message>
+
+        <message name="GROUP_STATE" id="94">
+            <field name="NAME" type="string"></field>
+            <field name="STATE" type="bool"></field>
+            <field name="ID" type="int32"></field>
+            <field name="PARENT" type="int32"></field>
+        </message>
+
+        <message name="INT_PARAMETER" id="95">
+            <field name="NAME" type="string"></field>
+            <field name="VALUE" type="int32"></field>
+        </message>
+
+        <message name="PARAM_DESCRIPTION" id="96">
+            <field name="NAME" type="string"></field>
+            <field name="TYPE" type="string"></field>
+            <field name="LEVEL" type="uint32"></field>
+            <field name="DESCRIPTION" type="string"></field>
+            <field name="EDIT_METHOD" type="string"></field>
+        </message>
+
+        <message name="SENSOR_LEVELS_DEPRECATED" id="97">
+            <field name="RECONFIGURE_CLOSE" type="m_BYTE" values="3"></field>
+            <field name="RECONFIGURE_STOP" type="m_BYTE" values="1"></field>
+            <field name="RECONFIGURE_RUNNING" type="m_BYTE" values="0"></field>
+        </message>
+
+        <message name="STR_PARAMETER" id="98">
+            <field name="NAME" type="string"></field>
+            <field name="VALUE" type="string"></field>
+        </message>
+
+        <message name="CONTACT_STATE" id="99">
+            <field name="INFO" type="string"></field>
+            <field name="COLLISION1_NAME" type="string"></field>
+            <field name="COLLISION2_NAME" type="string"></field>
+            <field name="WRENCHES" type="m_WRENCH[]"></field>
+            <field name="TOTAL_WRENCH" type="m_WRENCH"></field>
+            <field name="CONTACT_POSITIONS" type="m_VECTOR_3[]"></field>
+            <field name="CONTACT_NORMALS" type="m_VECTOR_3[]"></field>
+            <field name="DEPTHS" type="float64[]"></field>
+        </message>
+
+        <message name="CONTACTS_STATE" id="100">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATES" type="m_CONTACT_STATE[]"></field>
+        </message>
+
+        <message name="LINK_STATE" id="101">
+            <field name="LINK_NAME" type="string"></field>
+            <field name="POSE" type="m_POSE"></field>
+            <field name="TWIST" type="m_TWIST"></field>
+            <field name="REFERENCE_FRAME" type="string"></field>
+        </message>
+
+        <message name="LINK_STATES" id="102">
+            <field name="NAME" type="string[]"></field>
+            <field name="POSE" type="m_POSE[]"></field>
+            <field name="TWIST" type="m_TWIST[]"></field>
+        </message>
+
+        <message name="MODEL_STATE" id="103">
+            <field name="MODEL_NAME" type="string"></field>
+            <field name="POSE" type="m_POSE"></field>
+            <field name="TWIST" type="m_TWIST"></field>
+            <field name="REFERENCE_FRAME" type="string"></field>
+        </message>
+
+        <message name="MODEL_STATES" id="104">
+            <field name="NAME" type="string[]"></field>
+            <field name="POSE" type="m_POSE[]"></field>
+            <field name="TWIST" type="m_TWIST[]"></field>
+        </message>
+
+        <message name="ODE_JOINT_PROPERTIES" id="105">
+            <field name="DAMPING" type="float64[]"></field>
+            <field name="HI_STOP" type="float64[]"></field>
+            <field name="LO_STOP" type="float64[]"></field>
+            <field name="ERP" type="float64[]"></field>
+            <field name="CFM" type="float64[]"></field>
+            <field name="STOP_ERP" type="float64[]"></field>
+            <field name="STOP_CFM" type="float64[]"></field>
+            <field name="FUDGE_FACTOR" type="float64[]"></field>
+            <field name="F_MAX" type="float64[]"></field>
+            <field name="VEL" type="float64[]"></field>
+        </message>
+
+        <message name="ODE_PHYSICS" id="106">
+            <field name="AUTO_DISABLE_BODIES" type="bool"></field>
+            <field name="SOR_PGS_PRECON_ITERS" type="uint32"></field>
+            <field name="SOR_PGS_ITERS" type="uint32"></field>
+            <field name="SOR_PGS_W" type="float64"></field>
+            <field name="SOR_PGS_RMS_ERROR_TOL" type="float64"></field>
+            <field name="CONTACT_SURFACE_LAYER" type="float64"></field>
+            <field name="CONTACT_MAX_CORRECTING_VEL" type="float64"></field>
+            <field name="CFM" type="float64"></field>
+            <field name="ERP" type="float64"></field>
+            <field name="MAX_CONTACT" type="uint32"></field>
+        </message>
+
+        <message name="WORLD_STATE" id="107">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POSE" type="m_POSE"></field>
+            <field name="TWIST" type="m_TWIST"></field>
+            <field name="WRENCH" type="m_WRENCH"></field>
+        </message>
+
+        <message name="ACCEL" id="108">
+            <field name="LINEAR" type="m_VECTOR_3"></field>
+            <field name="ANGULAR" type="m_VECTOR_3"></field>
+        </message>
+
+        <message name="ACCEL_STAMPED" id="109">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ACCEL" type="m_ACCEL"></field>
+        </message>
+
+        <message name="ACCEL_WITH_COVARIANCE" id="110">
+            <field name="ACCEL" type="m_ACCEL"></field>
+            <field name="COVARIANCE" type="float64[36]"></field>
+        </message>
+
+        <message name="ACCEL_WITH_COVARIANCE_STAMPED" id="111">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ACCEL" type="m_ACCEL_WITH_COVARIANCE"></field>
+        </message>
+
+        <message name="INERTIA" id="112">
+            <field name="M" type="float64"></field>
+            <field name="COM" type="m_VECTOR_3"></field>
+            <field name="IXX" type="float64"></field>
+            <field name="IXY" type="float64"></field>
+            <field name="IXZ" type="float64"></field>
+            <field name="IYY" type="float64"></field>
+            <field name="IYZ" type="float64"></field>
+            <field name="IZZ" type="float64"></field>
+        </message>
+
+        <message name="INERTIA_STAMPED" id="113">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="INERTIA" type="m_INERTIA"></field>
+        </message>
+
+        <message name="POINT" id="114">
+            <field name="X" type="float64"></field>
+            <field name="Y" type="float64"></field>
+            <field name="Z" type="float64"></field>
+        </message>
+
+        <message name="POINT32" id="115">
+            <field name="X" type="float32"></field>
+            <field name="Y" type="float32"></field>
+            <field name="Z" type="float32"></field>
+        </message>
+
+        <message name="POINT_STAMPED" id="116">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POINT" type="m_POINT"></field>
+        </message>
+
+        <message name="POLYGON" id="117">
+            <field name="POINTS" type="m_POINT32[]"></field>
+        </message>
+
+        <message name="POLYGON_STAMPED" id="118">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POLYGON" type="m_POLYGON"></field>
+        </message>
+
+        <message name="POSE" id="119">
+            <field name="POSITION" type="m_POINT"></field>
+            <field name="ORIENTATION" type="m_QUATERNION"></field>
+        </message>
+
+        <message name="POSE_2D" id="120">
+            <field name="X" type="float64"></field>
+            <field name="Y" type="float64"></field>
+            <field name="THETA" type="float64"></field>
+        </message>
+
+        <message name="POSE_ARRAY" id="121">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POSES" type="m_POSE[]"></field>
+        </message>
+
+        <message name="POSE_STAMPED" id="122">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POSE" type="m_POSE"></field>
+        </message>
+
+        <message name="POSE_WITH_COVARIANCE" id="123">
+            <field name="POSE" type="m_POSE"></field>
+            <field name="COVARIANCE" type="float64[36]"></field>
+        </message>
+
+        <message name="POSE_WITH_COVARIANCE_STAMPED" id="124">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POSE" type="m_POSE_WITH_COVARIANCE"></field>
+        </message>
+
+        <message name="QUATERNION" id="125">
+            <field name="X" type="float64"></field>
+            <field name="Y" type="float64"></field>
+            <field name="Z" type="float64"></field>
+            <field name="W" type="float64"></field>
+        </message>
+
+        <message name="QUATERNION_STAMPED" id="126">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="QUATERNION" type="m_QUATERNION"></field>
+        </message>
+
+        <message name="TRANSFORM" id="127">
+            <field name="TRANSLATION" type="m_VECTOR_3"></field>
+            <field name="ROTATION" type="m_QUATERNION"></field>
+        </message>
+
+        <message name="TRANSFORM_STAMPED" id="128">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="TRANSFORM" type="m_TRANSFORM"></field>
+        </message>
+
+        <message name="TWIST" id="129">
+            <field name="LINEAR" type="m_VECTOR_3"></field>
+            <field name="ANGULAR" type="m_VECTOR_3"></field>
+        </message>
+
+        <message name="TWIST_STAMPED" id="130">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="TWIST" type="m_TWIST"></field>
+        </message>
+
+        <message name="TWIST_WITH_COVARIANCE" id="131">
+            <field name="TWIST" type="m_TWIST"></field>
+            <field name="COVARIANCE" type="float64[36]"></field>
+        </message>
+
+        <message name="TWIST_WITH_COVARIANCE_STAMPED" id="132">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="TWIST" type="m_TWIST_WITH_COVARIANCE"></field>
+        </message>
+
+        <message name="VECTOR_3" id="133">
+            <field name="X" type="float64"></field>
+            <field name="Y" type="float64"></field>
+            <field name="Z" type="float64"></field>
+        </message>
+
+        <message name="VECTOR_3_STAMPED" id="134">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="VECTOR" type="m_VECTOR_3"></field>
+        </message>
+
+        <message name="WRENCH" id="135">
+            <field name="FORCE" type="m_VECTOR_3"></field>
+            <field name="TORQUE" type="m_VECTOR_3"></field>
+        </message>
+
+        <message name="WRENCH_STAMPED" id="136">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="WRENCH" type="m_WRENCH"></field>
+        </message>
+
+        <message name="OCCUPANCY_GRID_UPDATE" id="137">
+            <field name="X" type="int32"></field>
+            <field name="Y" type="int32"></field>
+            <field name="WIDTH" type="uint32"></field>
+            <field name="HEIGHT" type="uint32"></field>
+            <field name="DATA" type="int8[]"></field>
+        </message>
+
+        <message name="POINT_CLOUD_2_UPDATE" id="138">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="TYPE" type="uint32"></field>
+            <field name="POINTS" type="m_POINT_CLOUD_2"></field>
+        </message>
+
+        <message name="PROJECTED_MAP" id="139">
+            <field name="MIN_Z" type="float64"></field>
+            <field name="MAX_Z" type="float64"></field>
+        </message>
+
+        <message name="PROJECTED_MAP_INFO" id="140">
+            <field name="FRAME_ID" type="string"></field>
+            <field name="X" type="float64"></field>
+            <field name="Y" type="float64"></field>
+            <field name="WIDTH" type="float64"></field>
+            <field name="HEIGHT" type="float64"></field>
+            <field name="MIN_Z" type="float64"></field>
+            <field name="MAX_Z" type="float64"></field>
+        </message>
+
+        <message name="GET_MAP_ACTION" id="141">
+            <field name="ACTION_GOAL" type="m_GET_MAP_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_GET_MAP_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_GET_MAP_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="GET_MAP_ACTION_FEEDBACK" id="142">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_GET_MAP_FEEDBACK"></field>
+        </message>
+
+        <message name="GET_MAP_ACTION_GOAL" id="143">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_GET_MAP_GOAL"></field>
+        </message>
+
+        <message name="GET_MAP_ACTION_RESULT" id="144">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_GET_MAP_RESULT"></field>
+        </message>
+
+        <message name="GET_MAP_FEEDBACK" id="145"></message>
+
+        <message name="GET_MAP_GOAL" id="146"></message>
+
+        <message name="GET_MAP_RESULT" id="147">
+            <field name="MAP" type="m_OCCUPANCY_GRID"></field>
+        </message>
+
+        <message name="GRID_CELLS" id="148">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="CELL_WIDTH" type="float32"></field>
+            <field name="CELL_HEIGHT" type="float32"></field>
+            <field name="CELLS" type="m_POINT[]"></field>
+        </message>
+
+        <message name="MAP_META_DATA" id="149">
+            <field name="MAP_LOAD_TIME" type="m_TIME"></field>
+            <field name="RESOLUTION" type="float32"></field>
+            <field name="WIDTH" type="uint32"></field>
+            <field name="HEIGHT" type="uint32"></field>
+            <field name="ORIGIN" type="m_POSE"></field>
+        </message>
+
+        <message name="OCCUPANCY_GRID" id="150">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="INFO" type="m_MAP_META_DATA"></field>
+            <field name="DATA" type="int8[]"></field>
+        </message>
+
+        <message name="ODOMETRY" id="151">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="CHILD_FRAME_ID" type="string"></field>
+            <field name="POSE" type="m_POSE_WITH_COVARIANCE"></field>
+            <field name="TWIST" type="m_TWIST_WITH_COVARIANCE"></field>
+        </message>
+
+        <message name="PATH" id="152">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POSES" type="m_POSE_STAMPED[]"></field>
+        </message>
+
+        <message name="OCTOMAP" id="153">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="BINARY" type="bool"></field>
+            <field name="ID" type="string"></field>
+            <field name="RESOLUTION" type="float64"></field>
+            <field name="DATA" type="int8[]"></field>
+        </message>
+
+        <message name="OCTOMAP_WITH_POSE" id="154">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ORIGIN" type="m_POSE"></field>
+            <field name="OCTOMAP" type="m_OCTOMAP"></field>
+        </message>
+
+        <message name="MODEL_COEFFICIENTS" id="155">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="VALUES" type="float32[]"></field>
+        </message>
+
+        <message name="POINT_INDICES" id="156">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="INDICES" type="int32[]"></field>
+        </message>
+
+        <message name="POLYGON_MESH" id="157">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="CLOUD" type="m_POINT_CLOUD_2"></field>
+            <field name="POLYGONS" type="m_VERTICES[]"></field>
+        </message>
+
+        <message name="VERTICES" id="158">
+            <field name="VERTICES" type="uint32[]"></field>
+        </message>
+
+        <message name="LOGGER" id="159">
+            <field name="NAME" type="string"></field>
+            <field name="LEVEL" type="string"></field>
+        </message>
+
+        <message name="CLOCK" id="160">
+            <field name="CLOCK" type="m_TIME"></field>
+        </message>
+
+        <message name="LOG" id="161">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="LEVEL" type="m_BYTE"></field>
+            <field name="NAME" type="string"></field>
+            <field name="MSG" type="string"></field>
+            <field name="FILE" type="string"></field>
+            <field name="FUNCTION" type="string"></field>
+            <field name="LINE" type="uint32[]"></field>
+            <field name="TOPICS" type="string[]"></field>
+        </message>
+
+        <message name="TOPIC_STATISTICS" id="162">
+            <field name="TOPIC" type="string"></field>
+            <field name="NODE_PUB" type="string"></field>
+            <field name="NODE_SUB" type="string"></field>
+            <field name="WINDOW_START" type="m_TIME"></field>
+            <field name="WINDOW_STOP" type="m_TIME"></field>
+            <field name="DELIVERED_MSGS" type="int32"></field>
+            <field name="DROPPED_MSGS" type="int32"></field>
+            <field name="TRAFFIC" type="int32"></field>
+            <field name="PERIOD_MEAN" type="m_DURATION"></field>
+            <field name="PERIOD_STDDEV" type="m_DURATION"></field>
+            <field name="PERIOD_MAC" type="m_DURATION"></field>
+            <field name="STAMP_AGE_MEAN" type="m_DURATION"></field>
+            <field name="STAMP_AGE_STDDEV" type="m_DURATION"></field>
+            <field name="STAMP_AGE_MAX" type="m_DURATION"></field>
+        </message>
+
+        <message name="FLOATS" id="163">
+            <field name="DATA" type="float32[]"></field>
+        </message>
+
+        <message name="HEADER_STRING" id="164">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="DATA" type="string"></field>
+        </message>
+
+        <message name="BATTERY_STATE" id="165">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="VOLTAGE" type="float32"></field>
+            <field name="CURRENT" type="float32"></field>
+            <field name="CHARGE" type="float32"></field>
+            <field name="CAPACITY" type="float32"></field>
+            <field name="DESIGN_CAPACITY" type="float32"></field>
+            <field name="PERCENTAGE" type="float32"></field>
+            <field name="POWER_SUPPLY_STATUS" type="uint8"></field>
+            <field name="POWER_SUPPLY_HEALTH" type="uint8"></field>
+            <field name="POWER_SUPPLY_TECHNOLOGY" type="uint8"></field>
+            <field name="PRESENT" type="bool"></field>
+            <field name="CELL_VOLTAGE" type="float32[]"></field>
+            <field name="LOCATION" type="string"></field>
+            <field name="SERIAL_NUMBER" type="string"></field>
+        </message>
+
+        <message name="CAMERA_INFO" id="166">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="HEIGHT" type="uint32"></field>
+            <field name="WIDTH" type="uint32"></field>
+            <field name="DISTORTION_MODEL" type="string"></field>
+            <field name="D" type="float64[]"></field>
+            <field name="K" type="float64[9]"></field>
+            <field name="R" type="float64[9]"></field>
+            <field name="P" type="float64[12]"></field>
+            <field name="BINNING_X" type="uint32"></field>
+            <field name="BINNING_Y" type="uint32"></field>
+            <field name="ROI" type="m_REGION_OF_INTEREST"></field>
+        </message>
+
+        <message name="CHANNEL_FLOAT_32" id="167">
+            <field name="NAME" type="string"></field>
+            <field name="VALUES" type="float32[]"></field>
+        </message>
+
+        <message name="COMPRESSED_IMAGE" id="168">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="FORMAT" type="string"></field>
+            <field name="DATA" type="uint8[]"></field>
+        </message>
+
+        <message name="FLUID_PRESSURE" id="169">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="FLUID_PRESSURE" type="float64"></field>
+            <field name="VARIANCE" type="float64"></field>
+        </message>
+
+        <message name="ILLUMINANCE" id="170">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ILLUMINANCE" type="float64"></field>
+            <field name="VARIANCE" type="float64"></field>
+        </message>
+
+        <message name="IMAGE" id="171">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="HEIGHT" type="uint32"></field>
+            <field name="WIDTH" type="uint32"></field>
+            <field name="IS_BIGENDIAN" type="uint8"></field>
+            <field name="STEP" type="uint32"></field>
+            <field name="DATA" type="uint8[]"></field>
+        </message>
+
+        <message name="IMU" id="172">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ORIENTATION" type="m_QUATERNION"></field>
+            <field name="ORIENTATION_COVARIANCE" type="float64[9]"></field>
+            <field name="ANGULAR_VELOCITY" type="m_VECTOR_3"></field>
+            <field name="ANGULAR_VELOCITY_COVARIANCE" type="float64[9]"></field>
+            <field name="LINEAR_ACCELERATION" type="m_VECTOR_3"></field>
+            <field name="LINEAR_ACCELERATION_COVARIANCE" type="float64[9]"></field>
+        </message>
+
+        <message name="JOINT_STATE" id="173">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="NAME" type="string[]"></field>
+            <field name="POSITION" type="float64[]"></field>
+            <field name="VELOCITY" type="float64[]"></field>
+            <field name="EFFORT" type="float64[]"></field>
+        </message>
+
+        <message name="JOY" id="174">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="AXES" type="float32[]"></field>
+            <field name="BUTTONS" type="int32[]"></field>
+        </message>
+
+        <message name="JOY_FEEDBACK" id="175">
+            <field name="TYPE" type="uint8"></field>
+            <field name="ID" type="uint8"></field>
+            <field name="INTENSITY" type="float32"></field>
+        </message>
+
+        <message name="JOY_FEEDBACK_ARRAY" id="176">
+            <field name="ARRAY" type="m_JOY_FEEDBACK[]"></field>
+        </message>
+
+        <message name="LASER_ECHO" id="177">
+            <field name="ECHOES" type="float32[]"></field>
+        </message>
+
+        <message name="LASER_SCAN" id="178">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ANGLE_MIN" type="float32"></field>
+            <field name="ANGLE_MAX" type="float32"></field>
+            <field name="ANGLE_INCREMENT" type="float32"></field>
+            <field name="TIME_INCREMENT" type="float32"></field>
+            <field name="SCAN_TIME" type="float32"></field>
+            <field name="RANGE_MIN" type="float32"></field>
+            <field name="RANGE_MAX" type="float32"></field>
+            <field name="RANGES" type="float32[]"></field>
+            <field name="INTENSITIES" type="float32[]"></field>
+        </message>
+
+        <message name="MAGNETIC_FIELD" id="179">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="MAGNETIC_FIELD" type="m_VECTOR_3"></field>
+            <field name="MAGNETIC_FIELD_COVARIANCE" type="float64[9]"
+        </message>
+
+        <message name="MULTI_DOF_JOINT_STATE" id="180">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="JOINT_NAMES" type="string[]"></field>
+            <field name="TRANSFORMS" type="m_TRANSFORM[]"></field>
+            <field name="TWIST" type="m_TWIST[]"></field>
+            <field name="WRENCH" type="m_WRENCH[]"></field>
+        </message>
+
+        <message name="MULTI_ECHO_LASER_SCAN" id="181">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="ANGLE_MIN" type="float32"></field>
+            <field name="ANGLE_MAX" type="float32"></field>
+            <field name="ANGLE_INCREMENT" type="float32"></field>
+            <field name="TIME_INCREMENT" type="float32"></field>
+            <field name="SCAN_TIME" type="float32"></field>
+            <field name="RANGE_MIN" type="float32"></field>
+            <field name="RANGE_MAX" type="float32"></field>
+            <field name="RANGES" type="m_LASER_ECHO[]"></field>
+            <field name="INTENSITIES" type="m_LASER_ECHO[]"></field>
+
+        </message>
+
+        <message name="NAV_SAT_FIX" id="182">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_NAV_SAT_STATUS"></field>
+            <field name="LATITUDE" type="float64"></field>
+            <field name="LONGITUDE" type="float64"></field>
+            <field name="ALTITUDE" type="float64"></field>
+            <field name="POSITION_COVARIANCE" type="float64[9]"></field>
+            <field name="POSITION_COVARIANCE_TYPE" type="uint8"></field>
+        </message>
+
+        <message name="NAV_SAT_STATUS" id="183">
+            <field name="STATUS" type="int8"></field>
+            <field name="SERVICE" type="uint16"></field>
+        </message>
+
+        <message name="POINT_CLOUD" id="184">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POINTS" type="m_POINT32[]"></field>
+            <field name="CHANNELS" type="m_CHANNEL_FLOAT_32[]"></field>
+        </message>
+
+        <message name="POINT_CLOUD_2" id="185">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="HEIGHT" type="uint32"></field>
+            <field name="WIDTH" type="uint32"></field>
+            <field name="FIELDS" type="m_POINT_FIELD[]"></field>
+            <field name="IS_BIGENDIAN" type="bool"></field>
+            <field name="POINT_STEP" type="uint32"></field>
+            <field name="ROW_STEP" type="uint32"></field>+
+            <field name="DATA" type="uint8[]"></field>
+            <field name="IS_DENSE" type="bool"></field>
+        </message>
+
+        <message name="POINT_FIELD" id="186">
+            <field name="NAME" type="string"></field>
+            <field name="OFFSET" type="uint32"></field>
+            <field name="DATATYPE" type="uint8"></field>
+            <field name="COUNT" type="uint32"></field>
+        </message>
+
+        <message name="RANGE" id="187">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="RADIATION_TYPE" type="uint8"></field>
+            <field name="FIELD_OF_VIEW" type="float32"></field>
+            <field name="MIN_RANGE" type="float32"></field>
+            <field name="MAX_RANGE" type="float32"></field>
+            <field name="RANGE" type="float32"></field>
+        </message>
+
+        <message name="REGION_OF_INTEREST" id="188">
+            <field name="X_OFFSET" type="uint32"></field>
+            <field name="Y_OFFSET" type="uint32"></field>
+            <field name="HEIGHT" type="uint32"></field>
+            <field name="WIDTH" type="uint32"></field>
+            <field name="DO_RECTIFY" type="bool"></field>
+        </message>
+
+        <message name="RELATIVE_HUMIDITY" id="189">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="RELATIVE_HUMIDITY" type="float64"></field>
+            <field name="VARIANCE" type="float64"></field>
+        </message>
+
+        <message name="TEMPERATURE" id="190">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="TEMPERATURE" type="float64"></field>
+            <field name="VARIANCE" type="float64"></field>
+        </message>
+
+        <message name="TIME_REFERENCE" id="191">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="TIME_REF" type="m_TIME"></field>
+            <field name="SOURCE" type="string"></field>
+        </message>
+
+        <message name="MESH" id="192">
+            <field name="TRIANGLES" type="m_MESH_TRIANGLE[]"></field>
+            <field name="VERTICES" type="m_POINT[]"></field>
+        </message>
+
+        <message name="MESH_TRIANGLE" id="193">
+            <field name="VERTEX_INDICES" type="uint32[3]"></field>
+        </message>
+
+        <message name="PLANE" id="194">
+            <field name="COEF" type="float64[4]"></field>
+        </message>
+
+        <message name="SOLID_PRIMITIVE" id="195">
+            <field name="TYPE" type="uint8"></field>
+            <field name="DIMENSIONS" type="float64[]"></field>
+        </message>
+
+        <message name="SMACH_CONTAINER_INITIAL_STATUS_CMD" id="196">
+            <field name="PATH" type="string"></field>
+            <field name="INITIAL_STATES" type="string[]"></field>
+            <field name="LOCAL_DATA" type="string"></field>
+        </message>
+
+        <message name="SMACH_CONTAINER_STATUS" id="197">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="PATH" type="string"></field>
+            <field name="INITIAL_STATES" type="string[]"></field>
+            <field name="ACTIVE_STATES" type="string[]"></field>
+            <field name="LOCAL_DATA" type="string"></field>
+            <field name="INFO" type="string"></field>
+        </message>
+
+        <message name="SMACH_CONTAINER_STRUCTURE" id="198">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="PATH" type="string"></field>
+            <field name="CHILDREN" type="string[]"></field>
+            <field name="INTERNAL_OUTCOMES" type="string[]"></field>
+            <field name="OUTCOMES_FROM" type="string[]"></field>
+            <field name="OUTCOMES_TO" type="string[]"></field>
+            <field name="CONTAINER_OUTCOMES" type="string[]"></field>
+        </message>
+
+        <message name="BOOL" id="199">
+            <field name="DATA" type="bool"></field>
+        </message>
+
+        <message name="BYTE" id="200">
+            <field name="DATA" type="byte"></field>
+        </message>
+
+        <message name="BYTE_MULTI_ARRAY" id="201">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="byte[]"></field>
+        </message>
+
+        <message name="CHAR" id="202">
+            <field name="DATA" type="char"></field>
+        </message>
+
+        <message name="COLOR_RGBA" id="203">
+            <field name="R" type="float64"></field>
+            <field name="G" type="float64"></field>
+            <field name="B" type="float64"></field>
+            <field name="A" type="float64"></field>
+        </message>
+
+        <message name="DURATION" id="204">
+            <field name="DATA" type="m_DURATION"></field>
+        </message>
+
+        <message name="EMPTY" id="205"></message>
+
+        <message name="FLOAT_32" id="206">
+            <field name="DATA" type="float32"></field>
+        </message>
+
+        <message name="FLOAT_32_MULTI_ARRAY" id="207">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="float32[]"></field>
+        </message>
+
+        <message name="FLOAT_64" id="208">
+            <field name="DATA" type="float64"></field>
+        </message>
+
+        <message name="FLOAT_64_MULTI_ARRAY" id="209">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="float64[]"></field>
+        </message>
+
+        <message name="HEADER" id="210">
+            <field name="SEQ" type="uint32"></field>
+            <field name="STAMP" type="m_TYPE"></field>
+            <field name="FRAME_ID" type="string"></field>
+        </message>
+
+        <message name="INT16" id="211">
+            <field name="DATA" type="int16"></field>
+        </message>
+
+        <message name="INT_16_MULTI_ARRAY" id="212">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="int16[]"></field>
+        </message>
+
+        <message name="INT_32" id="213">
+            <field name="DATA" type="int32"></field>
+        </message>
+
+        <message name="INT_32_MULTI_ARRAY" id="214">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="int32[]"></field>
+        </message>
+
+        <message name="INT_64" id="215">
+            <field name="DATA" type="int64"></field>
+        </message>
+
+        <message name="INT_64_MULTI_ARRAY" id="216">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="int64[]"></field>
+        </message>
+
+        <message name="INT_8" id="217">
+            <field name="DATA" type="int8"></field>
+        </message>
+
+        <message name="INT_8_MULTI_ARRAY" id="218">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="int8[]"></field>
+        </message>
+
+        <message name="MULTI_ARRAY_DIMENSION" id="219">
+            <field name="LABEL" type="string"></field>
+            <field name="SIZE" type="uint32"></field>
+            <field name="STRIDE" type="uint32"></field>
+        </message>
+
+        <message name="MULTI_ARRAY_LAYOUT" id="220">
+            <field name="DIM" type="m_MULTI_ARRAY_DIMENSION[]"></field>
+            <field name="DATA_OFFSET" type="uint32"></field>
+        </message>
+
+        <message name="STRING" id="221">
+            <field name="DATA" type="string"></field>
+        </message>
+
+        <message name="TIME" id="222">
+            <field name="DATA" type="m_TIME"></field>
+        </message>
+
+        <message name="UINT_16" id="223">
+            <field name="DATA" type="uint16"></field>
+        </message>
+
+        <message name="UINT_16_MULTI_ARRAY" id="224">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="uint16[]"></field>
+        </message>
+
+        <message name="UINT_32" id="225">
+            <field name="DATA" type="uint32"></field>
+        </message>
+
+        <message name="UINT_32_MULTI_ARRAY" id="226">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="uint32[]"></field>
+        </message>
+
+        <message name="UINT_64" id="227">
+            <field name="DATA" type="uint64"></field>
+        </message>
+
+        <message name="UINT_64_MULTI_ARRAY" id="228">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="uint64[]"></field>
+        </message>
+
+        <message name="UINT_8" id="229">
+            <field name="DATA" type="uint8"></field>
+        </message>
+
+        <message name="UINT_8_MULTI_ARRAY" id="230">
+            <field name="LAYOUT" type="m_MULTI_ARRAY_LAYOUT"></field>
+            <field name="DATA" type="uint8[]"></field>
+        </message>
+
+        <message name="DISPARITY_IMAGE" id="231">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="IMAGE" type="m_IMAGE"></field>
+            <field name="F" type="float32"></field>
+            <field name="T" type="float32"></field>
+            <field name="VALID_WINDOW" type="m_REGION_OF_INTEREST"></field>
+            <field name="MIN_DISPARITY" type="float32"></field>
+            <field name="MAX_DISPARITY" type="float32"></field>
+            <field name="DELTA_D" type="float32"></field>
+        </message>
+
+        <message name="INCREMENT_ACTION" id="232">
+            <field name="ACTION_GOAL" type="m_INCREMENT_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_INCREMENT_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_INCREMENT_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="INCREMENT_ACTION_FEEDBACK" id="233">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_INCREMENT_FEEDBACK"></field>
+        </message>
+
+        <message name="INCREMENT_ACTION_GOAL" id="234">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_INCREMENT_GOAL"></field>
+        </message>
+
+        <message name="INCREMENT_ACTION_RESULT" id="235">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_INCREMENT_RESULT"></field>
+        </message>
+
+        <message name="INCREMENT_FEEDBACK" id="236"></message>
+
+        <message name="INCREMENT_GOAL" id="237">
+            <field name="INCREMENT_BY" type="float32[]"></field>
+        </message>
+
+        <message name="INCREMENT_RESULT" id="238"></message>
+
+        <message name="TF_MESSAGE" id="239">
+            <field name="TRANSFORMS" type="m_TRANSFORM_STAMPED"></field>
+        </message>
+
+        <message name="LOOKUP_TRANSFORM_ACTION" id="240">
+            <field name="ACTION_GOAL" type="m_LOOKUP_TRANSFORM_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_LOOKUP_TRANSFORM_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_LOOKUP_TRANSFORM_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="LOOKUP_TRANSFORM_ACTION_FEEDBACK" id="241">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_LOOKUP_TRANSFORM_FEEDBACK"></field>
+        </message>
+
+        <message name="LOOKUP_TRANSFORM_ACTION_GOAL" id="242">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_LOOKUP_TRANSFORM_GOAL"></field>
+        </message>
+
+        <message name="LOOKUP_TRANSFORM_ACTION_RESULT" id="243">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_LOOKUP_TRANSFORM_RESULT"></field>
+        </message>
+
+        <message name="LOOKUP_TRANSFORM_FEEDBACK" id="244"></message>
+
+        <message name="LOOKUP_TRANSFORM_GOAL" id="245">
+            <field name="TARGET_FRAME" type="string"></field>
+            <field name="SOURCE_FRAME" type="string"></field>
+            <field name="SOURCE_TIME" type="m_TIME"></field>
+            <field name="TIMEOUT" type="m_DURATION"></field>
+            <field name="TARGET_TIME" type="m_TIME"></field>
+            <field name="FIXED_FRAME" type="string"></field>
+            <field name="ADVANCED" type="bool"></field>
+        </message>
+
+        <message name="LOOKUP_TRANSFORM_RESULT" id="246">
+            <field name="TRANSFORM" type="m_TRANSFORM_STAMPED"></field>
+            <field name="ERROR" type="m_TF_2_ERROR"></field>
+        </message>
+
+        <message name="TF_2_ERROR" id="247">
+            <field name="ERROR" type="uint8"></field>
+            <field name="ERROR_STRING" type="string"></field>
+        </message>
+
+        <message name="TF_2_MESSAGE" id="248">
+            <field name="TRANSFORMS" type="m_TRANSFORM_STAMPED"></field>
+        </message>
+
+        <message name="PACKET" id="249">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="DATA" type="uint8[]"></field>
+            <field name="B_O_S" type="int32"></field>
+            <field name="E_O_S" type="int32"></field>
+            <field name="GRANULE_POS" type="int64"></field>
+            <field name="PACKET_NO" type="int64"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY" id="250">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="JOINT_NAMES" type="string[]"></field>
+            <field name="POINTS" type="m_JOINT_TRAJECTORY_POINT[]"></field>
+        </message>
+
+        <message name="JOINT_TRAJECTORY_POINT" id="251">
+            <field name="POSITIONS" type="float64[]"></field>
+            <field name="VELOCITIES" type="float64[]"></field>
+            <field name="ACCELERATIONS" type="float64[]"></field>
+            <field name="EFFORT" type="float64[]"></field>
+            <field name="TIME_FROM_START" type="m_DURATION"></field>
+        </message>
+
+        <message name="MULTI_DOF_JOINT_TRAJECTORY" id="252">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="JOINT_NAMES" type="string[]"></field>
+            <field name="POINTS" type="m_MULTI_DOF_JOINT_TRAJECTORY_POINT[]"></field>
+        </message>
+
+        <message name="MULTI_DOF_JOINT_TRAJECTORY_POINT" id="253">
+            <field name="TRANSFORMS" type="m_TRANSFORM[]"></field>
+            <field name="VELOCITIES" type="m_TWIST[]"></field>
+            <field name="ACCELERATIONS" type="m_TWIST[]"></field>
+            <field name="TIME_FROM_START" type="m_DURATION"></field>
+        </message>
+
+        <message name="SHAPE_ACTION" id="254">
+            <field name="ACTION_GOAL" type="m_SHAPE_ACTION_GOAL"></field>
+            <field name="ACTION_RESULT" type="m_SHAPE_ACTION_RESULT"></field>
+            <field name="ACTION_FEEDBACK" type="m_SHAPE_ACTION_FEEDBACK"></field>
+        </message>
+
+        <message name="SHAPE_ACTION_FEEDBACK" id="255">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="FEEDBACK" type="m_SHAPE_FEEDBACK"></field>
+        </message>
+
+        <message name="SHAPE_ACTION_GOAL" id="256">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="GOAL_ID" type="m_GOAL_ID"></field>
+            <field name="GOAL" type="m_SHAPE_GOAL"></field>
+        </message>
+
+        <message name="SHAPE_ACTION_RESULT" id="257">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="STATUS" type="m_GOAL_STATUS"></field>
+            <field name="RESULT" type="m_SHAPE_RESULT"></field>
+        </message>
+
+        <message name="SHAPE_FEEDBACK" id="258"></message>
+
+        <message name="SHAPE_GOAL" id="259">
+            <field name="EDGES" type="int32"></field>
+            <field name="RADIUS" type="float32"></field>
+        </message>
+
+        <message name="SHAPE_RESULT" id="260">
+            <field name="INTERIOR_ANGLE" type="float32"></field>
+            <field name="APOTHEM" type="float32"></field>
+        </message>
+
+        <message name="VELOCITY" id="261">
+            <field name="LINEAR" type="float32"></field>
+            <field name="ANGULAR" type="float32"></field>
+        </message>
+
+        <message name="COLOR" id="262">
+            <field name="R" type="uint8"></field>
+            <field name="G" type="uint8"></field>
+            <field name="B" type="uint8"></field>
+        </message>
+
+        <message name="POSE" id="263">
+            <field name="X" type="float32"></field>
+            <field name="Y" type="float32"></field>
+            <field name="THETA" type="float32"></field>
+            <field name="LINEAR_VELOCITY" type="float32"></field>
+            <field name="ANGULAR_VELOCITY" type="float32"></field>
+        </message>
+
+        <message name="IMAGE_MARKER" id="264">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="NS" type="string"></field>
+            <field name="ID" type="int32"></field>
+            <field name="TYPE" type="int32"></field>
+            <field name="ACTION" type="int32"></field>
+            <field name="POSITION" type="m_POINT"></field>
+            <field name="SCALE" type="float32"></field>
+            <field name="OUTLINE_COLOR" type="m_COLOR_RGBA"></field>
+            <field name="FILLED" type="uint8"></field>
+            <field name="FILL_COLOR" type="m_COLOR_RGBA"></field>
+            <field name="LIFETIME" type="m_DURATION"></field>
+            <field name="POINTS" type="m_POINT[]"></field>
+            <field name="OUTLINE_COLORS" type="m_COLOR_RGBA"></field>
+        </message>
+
+        <message name="INTERACTIVE_MARKER" id="265">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POSE" type="m_POSE"></field>
+            <field name="NAME" type="string"></field>
+            <field name="DESCRIPTION" type="string"></field>
+            <field name="SCALE" type="float32"></field>
+            <field name="MENU_ENTRIES" type="m_MENU_ENTRY[]"></field>
+            <field name="CONTROLS" type="m_INTERACTIVE_MARKER_CONTROL"></field>
+        </message>
+
+        <message name="INTERACTIVE_MARKER_CONTROL" id="266">
+            <field name="NAME" type="string"></field>
+            <field name="ORIENTATION" type="m_QUATERNION"></field>
+            <field name="ORIENTATION_MODE" type="uint8"></field>
+            <field name="INTERACTION_MODE" type="uint8"></field>
+            <field name="ALWAYS_VISIBLE" type="bool"></field>
+            <field name="MARKERS" type="m_MARKER[]"></field>
+        </message>
+
+        <message name="INTERACTIVE_MARKER_FEEDBACK" id="267">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="CLIENT_ID" type="string"></field>
+            <field name="MARKER_NAME" type="string"></field>
+            <field name="CONTROL_NAME" type="string"></field>
+            <field name="EVENT_TYPE" type="uint8"></field>
+            <field name="POSE" type="m_POSE"></field>
+            <field name="MENU_ENTRY_ID" type="uint32"></field>
+            <field name="MOUSE_POINT" type="m_POINT"></field>
+            <field name="MOUSE_POINT_VALID" type="bool"></field>
+        </message>
+
+        <message name="INTERACTIVE_MARKER_INIT" id="268">
+            <field name="SERVER_ID" type="string"></field>
+            <field name="SEQ_NUM" type="uint64"></field>
+            <field name="MARKERS" type="m_INTERACTIVE_MARKER[]"></field>
+        </message>
+
+        <message name="INTERACTIVE_MARKER_POSE" id="269">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="POSE" type="m_POSE"></field>
+            <field name="NAME" type="string"></field>
+        </message>
+
+        <message name="INTERACTIVE_MARKER_UPDATE" id="270">
+            <field name="SERVER_ID" type="string"></field>
+            <field name="SEQ_NUM" type="uint64"></field>
+            <field name="TYPE" type="uint8"></field>
+            <field name="MARKERS" type="m_INTERACTIVE_MARKER[]"></field>
+            <field name="POSES" type="m_INTERACTIVE_MARKER_POSE[]"></field>
+            <field name="ERASES" type="string[]"></field>
+        </message>
+
+        <message name="MARKER" id="271">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="NS" type="string"></field>
+            <field name="ID" type="int32"></field>
+            <field name="TYPE" type="int32"></field>
+            <field name="ACTION" type="int32"></field>
+            <field name="POSE" type="m_POSE"></field>
+            <field name="SCALE" type="m_VECTOR_3"></field>
+            <field name="COLOR" type="m_COLOR_RGBA"></field>
+            <field name="LIFETIME" type="m_DURATION"></field>
+            <field name="FRAME_LOCKED" type="bool"></field>
+            <field name="POINTS" type="m_POINT[]"></field>
+            <field name="COLORS" type="m_COLOR_RGBA[]"></field>
+            <field name="TEXT" type="string"></field>
+            <field name="MESH_RESOURCE" type="string"></field>
+            <field name="MESH_USE_EMBEDDED_MATERIALS" type="bool"></field>
+        </message>
+
+        <message name="MARKER_ARRAY" id="272">
+            <field name="MARKERS" type="m_MARKER[]"></field>
+        </message>
+
+        <message name="MENU_ENTRY" id="273">
+            <field name="ID" type="uint32"></field>
+            <field name="PARENT_ID" type="uint32"></field>
+            <field name="TITLE" type="string"></field>
+            <field name="COMMAND" type="string"></field>
+            <field name="COMMAND_TYPE" type="uint8"></field>
+        </message>
+
+    </msg_class>
+</protocol>
