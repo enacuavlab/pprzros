@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="pprzros" type="pprzros_test" name="pprzros_test1" respawn="true"/>
+    <node pkg="rostopic" type="rostopic" name="rostopic" args="echo /from_uav"/>
+    <node pkg="rostopic" type="rostopic" name="rostopic" args="pub /to_uav pprzros/PprzrosMsg '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'"/>
+</launch>
