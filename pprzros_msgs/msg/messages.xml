@@ -1099,7 +1099,7 @@
         <message name="MAGNETIC_FIELD" id="179">
             <field name="HEADER" type="m_HEADER"></field>
             <field name="MAGNETIC_FIELD" type="m_VECTOR_3"></field>
-            <field name="MAGNETIC_FIELD_COVARIANCE" type="float64[9]"
+            <field name="MAGNETIC_FIELD_COVARIANCE" type="float64[9]"></field>
         </message>
 
         <message name="MULTI_DOF_JOINT_STATE" id="180">
