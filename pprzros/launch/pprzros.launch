@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="pprzros" type="pprzros_run" name="pprzros" output="screen"/>
+</launch>

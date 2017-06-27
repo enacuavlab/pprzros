@@ -24,7 +24,7 @@ from pprzlink.udp import *
 
 class RosUdpMessagesInterface():
     def __init__(self, address='127.0.0.1'):
-        self.interface = UdpMessagesInterface(callback=self.to_ros, uplink_port=UPLINK_PORT, downlink_port=DOWNLINK_PORT, msg_class='telemetry', verbose=True)
+        self.interface = UdpMessagesInterface(callback=self.to_ros, uplink_port=UPLINK_PORT, downlink_port=DOWNLINK_PORT, msg_class='telemetry', verbose=False)
         self.sub = rospy.Subscriber('from_ros', PprzrosMsg, self.from_ros)
         self.pub = rospy.Publisher('to_ros', PprzrosMsg, queue_size=10)
         self.address = address
@@ -47,11 +47,11 @@ class RosUdpMessagesInterface():
 
     def from_ros(self, ros_msg):
         pprz_msg = self.ros2pprz(ros_msg)
-        interface.send(pprz_msg, ros_msg.sender_id, self.address)
+        self.interface.send(pprz_msg, ros_msg.sender_id, self.address)
     
-    def to_ros(self, sender_id, address, pprz_msg):
+    def to_ros(self, sender_id, address, pprz_msg, length):
         ros_msg = self.pprz2ros(sender_id, pprz_msg)
-        pprzros_pub.publish(ros_msg)
+        self.pub.publish(ros_msg)
         
     def run(self):
         self.interface.start()
@@ -71,7 +71,7 @@ class RosUdpMessagesInterface():
         ros_msg.len = len(ros_msg.data)
         ros_msg.class_id = 2
         ros_msg.comp_id = 0
-        ros_msg.msg_id = pprz_msg.msg_id()
+        ros_msg.msg_id = pprz_msg.msg_id
         ros_msg.sender_id = sender_id
         ros_msg.receiver_id = 0
         return ros_msg
