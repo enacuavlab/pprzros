@@ -1,7 +1,8 @@
 ##!/usr/bin/env python
 
 # TODO
-# Connect pprzlink callback so pprz_from_uav_cb is called
+# Maintain table with sender_id/address correspondances
+# Fill the whole pprz_msg (not just the binary data) ?
 
 #CATKIN_BASE = get_env()
 
@@ -12,23 +13,18 @@ import rospy
 import rospkg
 rospack = rospkg.RosPack()
 PPRZROS_BASE = rospack.get_path('pprzros')
-#print(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python/pprzlink')
 sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python')
 
 from pprzros_msgs.msg import PprzrosMsg
 from pprzlink.message import PprzMessage
 
 #from pprzlink.serial import SerialMessagesInterface
-from pprzlink.udp import UdpMessagesInterface
+from pprzlink.udp import *
 #from pprzlink.ivy import IvyMessagesInterface
 
-# Only one supported for now
-#interface_type = serial
-interface = UdpMessagesInterface
-
-class RosUdpMessageInterface():
-    def __init__(self, verbose=False, uplink_port=, downlink_port=, address='127.0.0.1'):
-        self.interface = UdpMessagesInterface(self.to_ros, pprzlink.udp.UPLINK_PORT, pprzlink.udp.DOWNLINK_PORT, msg_class='telemetry', verbose=True)
+class RosUdpMessagesInterface():
+    def __init__(self, address='127.0.0.1'):
+        self.interface = UdpMessagesInterface(callback=self.to_ros, uplink_port=UPLINK_PORT, downlink_port=DOWNLINK_PORT, msg_class='telemetry', verbose=True)
         self.sub = rospy.Subscriber('from_ros', PprzrosMsg, self.from_ros)
         self.pub = rospy.Publisher('to_ros', PprzrosMsg, queue_size=10)
         self.address = address
@@ -60,7 +56,7 @@ class RosUdpMessageInterface():
     def run(self):
         self.interface.start()
         while (not rospy.is_shutdown()) and self.interface.isAlive():      
-            rate.sleep()
+            self.rate.sleep()
         self.interface.stop()
         
     def ros2pprz(self, ros_msg):      
