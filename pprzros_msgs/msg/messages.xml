@@ -1267,7 +1267,7 @@
         </message>
 
         <message name="DURATION" id="204">
-            <field name="DATA" type="m_DURATION"></field>
+            <field name="DATA" type="int32"></field>
         </message>
 
         <message name="EMPTY" id="205"></message>
@@ -1292,7 +1292,7 @@
 
         <message name="HEADER" id="210">
             <field name="SEQ" type="uint32"></field>
-            <field name="STAMP" type="m_TYPE"></field>
+            <field name="STAMP" type="m_TIME"></field>
             <field name="FRAME_ID" type="string"></field>
         </message>
 
@@ -1348,7 +1348,7 @@
         </message>
 
         <message name="TIME" id="222">
-            <field name="DATA" type="m_TIME"></field>
+            <field name="DATA" type="int32"></field>
         </message>
 
         <message name="UINT_16" id="223">
@@ -1567,7 +1567,7 @@
             <field name="B" type="uint8"></field>
         </message>
 
-        <message name="POSE" id="263">
+        <message name="TURTLESIM_POSE" id="263">
             <field name="X" type="float32"></field>
             <field name="Y" type="float32"></field>
             <field name="THETA" type="float32"></field>
@@ -1674,4 +1674,33 @@
         </message>
 
     </msg_class>
+
+    <msg_class name="SLAMDUNK">
+
+        <message name="BOOL_STAMPED" id="274">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="VALUE" type="bool"></field>
+        </message>
+
+        <message name="QUALITY" id="275">
+            <field name="VALUE" type="uint8"></field>
+        </message>
+
+        <message name="QUALITY_STAMPED" id="276">
+            <field name="HEADER" type="m_HEADER"></field>
+            <field name="QUALITY" type="m_QUALITY"></field>
+        </message>
+
+        <message name="RECONFIGURE_LEVELS" id="277"></message>
+
+        <message name="SERVICE_TRIGGER" id="278"></message>
+
+        <message name="STREAMING_TYPES" id="279"></message>
+
+        <message name="VIDEO_MODES" id="280"></message>
+
+        <message name="VIDEO_SOURCES" id="281"></message>
+
+    </msg_class>
+
 </protocol>
