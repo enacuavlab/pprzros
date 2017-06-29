@@ -5,6 +5,11 @@ import rostopic
 import rospy
 import os, sys
 import re
+from subprocess import call
+import fileinput
+
+from pprzros_msgs.msg import PprzrosMsg
+
 
 message_file = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                                           "msg/messages.xml"))
@@ -41,12 +46,48 @@ def generate_msgs(topic):
     xml_message_name = camelcase2xml(message_name)
     rec_parser(xml_message_name)
 
+def add_msgs(files):
+    good_line = False
+
+    for line in fileinput.input('../CMakeLists.txt', inplace=1):
+        if "PprzrosMsg.msg" in line:
+            good_line = True
+        else:
+            if good_line:
+                for file in files:
+                    print "  " + file + ".msg"
+            good_line = False
+        print line,
+
+    call(["catkin_make", "-C" ,"../.."])
+
+def delete_msgs():
+    to_delete = []
+    for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/msg"):
+        if file.endswith(".msg") and file != "PprzrosMsg.msg":
+            os.remove(file)
+            to_delete.append("  " + file + "\n")
+    f = open("../CMakeLists.txt", "r+")
+    lines = f.readlines()
+    f.seek(0)
+    for line in lines:
+        if line not in to_delete:
+            f.write(line)
+    f.truncate()
+    f.close()
+
 def subscribe(topic):
-    # for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/msg"):
-    #     if file.endswith(".msg"):
-    #         __import__(file[:4])
-    # print sys.modules.keys()
-    # rospy.Subscriber('chatter', PoseWithCovarianceStamped, callback)
+    to_import_list = []
+    for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/msg"):
+        if file.endswith(".msg") and file != "PprzrosMsg.msg":
+            to_import_list.append(file[:-4])
+    add_msgs(to_import_list)
+    msgs = __import__('pprzros_msgs.msg', globals(), locals(), to_import_list, -1)
+    rospy.Subscriber('chatter', msgs.PoseWithCovarianceStamped, to_PprzrosMsg)
+    return 0
+
+def to_PprzrosMsg():
+    #TODO
     return 0
 
 if __name__ == '__main__':
@@ -54,3 +95,4 @@ if __name__ == '__main__':
     #parser("POSE_STAMPED")
     generate_msgs("/chatter")
     subscribe("/chatter")
+    delete_msgs()
