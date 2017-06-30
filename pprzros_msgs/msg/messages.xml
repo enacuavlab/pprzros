@@ -1267,7 +1267,7 @@
         </message>
 
         <message name="DURATION" id="204">
-            <field name="DATA" type="int32"></field>
+            <field name="DATA" type="time"></field>
         </message>
 
         <message name="EMPTY" id="205"></message>
@@ -1348,7 +1348,7 @@
         </message>
 
         <message name="TIME" id="222">
-            <field name="DATA" type="int32"></field>
+            <field name="DATA" type="time"></field>
         </message>
 
         <message name="UINT_16" id="223">

@@ -55,7 +55,8 @@ def add_msgs(files):
         else:
             if good_line:
                 for file in files:
-                    print "  " + file + ".msg"
+                    if file != "PprzrosMsg":
+                        print "  " + file + ".msg"
             good_line = False
         print line,
 
@@ -95,16 +96,38 @@ def subscribe(topic):
     return 0
 
 def to_PprzrosMsg(data):
-    print data
-    #TODO
+    tree = etree.parse(message_file)
+    root = tree.getroot()
+    os.chdir(os.path.dirname(os.path.realpath(__file__)) + "/msg")
+    def rec_parser(data, parsed):
+        message_name = type(data).__name__
+        xml_message_name = camelcase2xml(message_name)
+        for the_class in root:
+            for the_message in the_class:
+                att = the_message.attrib["name"]
+                if xml_message_name == att:
+                    for the_attribute in the_message:
+                        att_att = the_attribute.attrib
+                        if att_att["type"][:2] == "m_":
+                            rec_parser(getattr(data, att_att["name"].lower()), parsed)
+                        else:
+                            if att_att["type"] == "time":
+                                parsed.append(("int32", data.to_nsec()))
+                            else:
+                                parsed.append((att_att["type"], getattr(data, att_att["name"].lower())))
+        return 0
+    parsed = []
+    rec_parser(data, parsed)
+    print parsed
+    #TODO change the "parse" list of tuples into uint8[] for data field of PprzrosMsg
     return 0
 
 def to_Ros(data):
     print data
-    #TODO
+    #TODO ?
     return 0
 
 if __name__ == '__main__':
     rospy.init_node('listener', anonymous=True)
-    subscribe("/from_ros")
-    #delete_msgs()
+    subscribe("/chatter")
+    delete_msgs()
