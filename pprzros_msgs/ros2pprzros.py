@@ -59,13 +59,14 @@ def add_msgs(files):
             good_line = False
         print line,
 
-    call(["catkin_make", "-C" ,"../.."])
+    call(["catkin_make", "--pkg", "pprzros_msgs","-C" ,"../.."])
 
-def delete_msgs():
+def delete_msgs(with_files = True):
     to_delete = []
     for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/msg"):
         if file.endswith(".msg") and file != "PprzrosMsg.msg":
-            os.remove(file)
+            if with_files:
+                os.remove(file)
             to_delete.append("  " + file + "\n")
     f = open("../CMakeLists.txt", "r+")
     lines = f.readlines()
@@ -77,22 +78,33 @@ def delete_msgs():
     f.close()
 
 def subscribe(topic):
-    to_import_list = []
-    for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/msg"):
-        if file.endswith(".msg") and file != "PprzrosMsg.msg":
-            to_import_list.append(file[:-4])
-    add_msgs(to_import_list)
-    msgs = __import__('pprzros_msgs.msg', globals(), locals(), to_import_list, -1)
-    rospy.Subscriber('chatter', msgs.PoseWithCovarianceStamped, to_PprzrosMsg)
+    type = rostopic.get_topic_type(topic)
+    if type[0].split("/")[1] != "PprzrosMsg":
+        generate_msgs(topic)
+        to_import_list = []
+        for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/msg"):
+            if file.endswith(".msg"):
+                to_import_list.append(file[:-4])
+        delete_msgs(False)
+        add_msgs(to_import_list)
+        msgs = __import__('pprzros_msgs.msg', globals(), locals(), to_import_list, -1)
+        rospy.Subscriber(type[1][1:], getattr(msgs, type[0].split("/")[1]), to_PprzrosMsg)
+    else:
+        rospy.Subscriber(type[1], PprzrosMsg, to_Ros)
+    rospy.spin()
     return 0
 
-def to_PprzrosMsg():
+def to_PprzrosMsg(data):
+    print data
+    #TODO
+    return 0
+
+def to_Ros(data):
+    print data
     #TODO
     return 0
 
 if __name__ == '__main__':
     rospy.init_node('listener', anonymous=True)
-    #parser("POSE_STAMPED")
-    generate_msgs("/chatter")
-    subscribe("/chatter")
-    delete_msgs()
+    subscribe("/from_ros")
+    #delete_msgs()
