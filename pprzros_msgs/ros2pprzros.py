@@ -8,18 +8,16 @@ import re
 from subprocess import call
 import fileinput
 
-from pprzros_msgs.msg import PprzrosMsg
-
-
 message_file = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                                           "msg/messages.xml"))
+acronyms = ["ID", "TF", "DOF"]
 
 def xml2camelcase(string):
-    return "".join(list(map((lambda elt: elt.capitalize()), string.split("_"))))
+    return "".join(list(map((lambda elt: elt.capitalize() if elt not in acronyms else elt), string.split("_"))))
 
 def camelcase2xml(string):
-    l = re.findall('[A-Z][^A-Z]+', string)
-    return "_".join(list(map((lambda elt: elt.upper()), l)))
+    l = re.findall('([0-9]+|[A-Z]([^A-Z]+|[A-Z]+((?=[A-Z][a-z])|(?=$)|(?=[0-9]))))', string)
+    return "_".join(list(map((lambda elt: elt[0].upper()), l)))
 
 def generate_msgs(topic):
     type = rostopic.get_topic_type(topic, True)
@@ -35,6 +33,8 @@ def generate_msgs(topic):
                 if xml_message_name == att:
                     for the_attribute in the_message:
                         att_att = the_attribute.attrib
+                        if att_att["type"][-2:] == "[]":
+                            att_att["type"] = att_att["type"][:-2]
                         if att_att["type"][:2] == "m_":
                             msg_file.write(xml2camelcase(att_att["type"][2:]) + " " + att_att["name"].lower() + "\n")
                             rec_parser(att_att["type"][2:])
@@ -60,7 +60,7 @@ def add_msgs(files):
             good_line = False
         print line,
 
-    call(["catkin_make", "--pkg", "pprzros_msgs","-C" ,"../.."])
+    call(["catkin_make", "-j8", "--pkg", "pprzros", "pprzros_msgs", "-C", "../.."])
 
 def delete_msgs(with_files = True):
     to_delete = []
@@ -80,18 +80,18 @@ def delete_msgs(with_files = True):
 
 def subscribe(topic):
     type = rostopic.get_topic_type(topic)
+    generate_msgs(topic)
+    to_import_list = []
+    for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/msg"):
+        if file.endswith(".msg"):
+            to_import_list.append(file[:-4])
+    delete_msgs(False)
+    add_msgs(to_import_list)
+    msgs = __import__('pprzros_msgs.msg', globals(), locals(), to_import_list, -1)
     if type[0].split("/")[1] != "PprzrosMsg":
-        generate_msgs(topic)
-        to_import_list = []
-        for file in os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/msg"):
-            if file.endswith(".msg"):
-                to_import_list.append(file[:-4])
-        delete_msgs(False)
-        add_msgs(to_import_list)
-        msgs = __import__('pprzros_msgs.msg', globals(), locals(), to_import_list, -1)
         rospy.Subscriber(type[1][1:], getattr(msgs, type[0].split("/")[1]), to_PprzrosMsg)
     else:
-        rospy.Subscriber(type[1], PprzrosMsg, to_Ros)
+        rospy.Subscriber(type[1], getattr(msgs, type[0].split("/")[1]), to_Ros)
     rospy.spin()
     return 0
 
@@ -129,5 +129,10 @@ def to_Ros(data):
 
 if __name__ == '__main__':
     rospy.init_node('listener', anonymous=True)
-    subscribe("/chatter")
-    delete_msgs()
+    if sys.argv[1] == "list":
+        call(["rostopic", "list"])
+        exit(0)
+    else:
+        call(["catkin", "clean", "-y"])
+        subscribe(sys.argv[1])
+        delete_msgs()
