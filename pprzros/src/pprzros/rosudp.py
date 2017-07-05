@@ -47,7 +47,7 @@ class RosUdpMessagesInterface():
         pprz_msg = self.ros2pprz(ros_msg)
         self.interface.send(pprz_msg, ros_msg.sender_id, self.address)
     
-    def to_ros(self, sender_id, address, pprz_msg):
+    def to_ros(self, sender_id, address, pprz_msg, length):
         ros_msg = self.pprz2ros(sender_id, pprz_msg)
         self.pub.publish(ros_msg)
         
@@ -59,7 +59,7 @@ class RosUdpMessagesInterface():
         
     def ros2pprz(self, ros_msg):      
         pprz_msg = PprzMessage('datalink',ros_msg.msg_id)
-        pprz_msg.binary_to_payload(ros_msg.data)
+        #pprz_msg.binary_to_payload(ros_msg.data)
         return pprz_msg
 
     def pprz2ros(self, sender_id, pprz_msg):

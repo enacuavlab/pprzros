@@ -8,9 +8,9 @@ std_msgs/Header header
 
 uint8 version
 uint8 len
-uint8 class_id
+string class_name
 uint8 comp_id
-uint8 msg_id
+string msg_name
 uint8 sender_id
 uint8 receiver_id
 uint16 checksum
