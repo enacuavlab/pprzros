@@ -49,7 +49,7 @@ PPRZROS_BASE = rospack.get_path('pprzros')
 sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python')
 sys.path.append(PPRZROS_BASE + '/src/pprzros')
 
-from rosivy import RosSerialMessagesInterface
+import rosivy
 from pprzlink.message import PprzMessage
 
 min_velocity_samples = 4
@@ -161,8 +161,8 @@ def callback(pose):
                         np.uint32(tow),
                         np.int32(heading)])
 
-    print message
-    ivy.from_ros(ivy.interface.pprz2ros(10, message))
+    # print message
+    ivy.from_ros(ivy.converter.pprz2ros(10, message))
 
 
 def listener():
@@ -172,7 +172,7 @@ def listener():
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
-    rospy.init_node('listener', anonymous=True)
+    # rospy.init_node('listener', anonymous=True)
 
     rospy.Subscriber('/pose', PoseStamped, callback)
 
@@ -181,6 +181,6 @@ def listener():
 
 if __name__ == '__main__':
     freq_transmit = 30.
-    ivy = RosSerialMessagesInterface()
+    ivy = rosivy.RosIvyMessagesInterface()
     drone = Drone(10)
     listener()
