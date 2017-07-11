@@ -22,9 +22,9 @@ from pprzlink.udp import *
 
 class RosUdpMessagesInterface(RosMessagesInterface):
     def __init__(self, address='127.0.0.1'):
-        RosMessagesInterface.__init__(self)
         self.interface = UdpMessagesInterface(callback=self.to_ros, uplink_port=UPLINK_PORT, downlink_port=DOWNLINK_PORT, msg_class='telemetry', verbose=False)
         self.address = address
+        RosMessagesInterface.__init__(self)
 
     def from_ros(self, ros_msg):
         pprz_msg = self.converter.ros2pprz(ros_msg)
@@ -32,6 +32,8 @@ class RosUdpMessagesInterface(RosMessagesInterface):
     
     def to_ros(self, sender_id, address, pprz_msg, length):
         ros_msg = self.converter.pprz2ros(sender_id, pprz_msg)
+        if pprz_msg.name == 'PONG':
+            print('KIKOU')
         self.pub.publish(ros_msg)
 
 def test():

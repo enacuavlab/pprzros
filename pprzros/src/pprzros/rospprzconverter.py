@@ -12,7 +12,6 @@ sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python')
 from pprzros_msgs.msg import PprzrosMsg
 from pprzlink.message import PprzMessage
 
-# Abstract class, not usable as is
 class PprzRosConverter():
 #    def __init__(self):
         

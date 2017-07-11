@@ -20,7 +20,7 @@ class RosMessagesInterface():
         self.pub = rospy.Publisher('to_ros', PprzrosMsg, queue_size=10)
         self.converter = PprzRosConverter()
 
-        rospy.init_node('rosudp_node', anonymous=True)
+        rospy.init_node('pprzros_node', anonymous=True)
         self.rate = rospy.Rate(10) # 10 Hz
 
     def stop(self):
@@ -32,13 +32,20 @@ class RosMessagesInterface():
             self.stop()
         except:
             pass
+    
+    # Overlay, because IVY interface doesn't have a isAlive function (will return True)
+    def isAlive(self):
+        try:
+            return self.interface.isAlive()
+        except:
+            return True
 
     def shutdown(self):
         self.interface.shutdown()
         
     def run(self):
         self.interface.start()
-        while (not rospy.is_shutdown()) and self.interface.isAlive():      
+        while (not rospy.is_shutdown()) and self.isAlive():      
             self.rate.sleep()
         self.interface.stop()
 
