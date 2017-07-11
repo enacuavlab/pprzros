@@ -1,0 +1,211 @@
+#!/usr/bin/env python
+#
+# Copyright (C) 2017 Gautier Hattenberger <gautier.hattenberger@enac.fr>
+#
+# This file is part of paparazzi.
+#
+# paparazzi is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# paparazzi is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with paparazzi.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+import rospy
+import pprzros
+import time
+import thread
+import threading
+
+import rospkg
+import sys
+rospack = rospkg.RosPack()
+PPRZROS_BASE = rospack.get_path('pprzros_demo')
+sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python')
+
+from geometry_msgs.msg import Point
+from pprzlink.message import PprzMessage
+from pprzros.rospprzconverter import PprzRosConverter
+from pprzros_msgs.msg import PprzrosMsg
+
+
+class PprzGuided(object):
+    def __init__(self, ac_id, verbose=False):
+        self.x = 0.0
+        self.y = 0.0
+        self.z = 0.0
+        self.done = False
+        self.nav = False
+        self.updated = False
+        self.done_evt = threading.Event()
+        self.ac_id = ac_id
+        self.verbose = verbose
+        self.converter = PprzRosConverter()
+        # publish to 'from_ros' topic for pprzros node
+        self.pub = rospy.Publisher('from_ros', PprzrosMsg, queue_size=10)
+        # subscribe to 'to_ros' topic from pprzros node
+        self.sub = rospy.Subscriber('to_ros', PprzrosMsg, self.reached)
+
+    def shutdown(self):
+        self.stop_nav()
+
+    def start_nav(self):
+        """
+        start navigation thread
+        """
+        try:
+            self.nav = True
+            thread.start_new_thread(self.navigate, ())
+        except:
+            self.nav = False
+            fault("Error: Unable to start thread")
+
+    def stop_nav(self):
+        """
+        stop navigation thread
+        """
+        self.nav = False
+
+    def navigate(self):
+        """
+        navigation thread function
+        """
+        rate = rospy.Rate(10)   # 10hz
+        while not rospy.is_shutdown() or self.nav:
+            if self.updated:
+                self.goto_ned(self.x, self.y, self.z)
+                self.updated = False
+            rate.sleep()
+
+    def start_remote(self):
+        """
+        start remote navigation control by subscribing to Point message
+        """
+        self.sub_remote = rospy.Subscriber('pos_setpoint', Point, self.update_sp)
+        self.start_nav()
+
+    def stop_remote(self):
+        """
+        stop remote control
+        """
+        stop_nav()
+        self.sub_remote.unregister()
+
+    def update_sp(self, sp):
+        """
+        update position setpoint from Point message
+        """
+        self.set(sp.x, sp.y, sp.z, wait=False)
+
+    def set(self, x, y, z, delay=0, wait=True):
+        """
+        set a new target position
+        wait for reaching the goal if requested
+        """
+        self.done = False
+        self.x = x
+        self.y = y
+        self.z = z
+        self.updated = True
+
+        if wait:
+            rate = rospy.Rate(5)
+            while not self.done and not rospy.is_shutdown() and self.nav:
+                rate.sleep()
+
+        self.done = False
+        time.sleep(delay)
+
+    def reached(self, topic):
+        """
+        test if the setpoint is reached by checking the ROTORCRAFT_FP message
+        """
+        def is_near(msg, x, y):
+            rospy.logdebug("Position %s: local: %d, target: %d, abs diff: %d",
+                           msg, x, y, abs(x - y))
+            return abs(x - y) < 0.5
+
+        if topic.msg_name == 'ROTORCRAFT_FP':
+            pprz_msg = self.converter.ros2pprz(topic)
+            pos_x = float(pprz_msg['north']) / 2.**8
+            pos_y = float(pprz_msg['east']) / 2.**8
+            pos_z = float(-pprz_msg['up']) / 2.**8
+            if is_near('north (x)', pos_x, self.x) and \
+               is_near('east (y)', pos_y, self.y) and \
+               is_near('down (z)', pos_z, self.z):
+                self.done = True
+                self.done_evt.set()
+
+    def goto_ned(self, north, east, down, heading=0.0):
+        """
+        goto a local NorthEastDown position in meters (if already in GUIDED mode)
+        """
+        msg = PprzMessage("datalink", "GUIDED_SETPOINT_NED")
+        msg['ac_id'] = self.ac_id
+        msg['flags'] = 0x00
+        msg['x'] = north
+        msg['y'] = east
+        msg['z'] = down
+        msg['yaw'] = heading
+        print("goto NED: %s" % msg)
+        ros_msg = self.converter.pprz2ros(0, msg)
+        self.pub.publish(ros_msg)
+
+    def goto_ned_relative(self, north, east, down, yaw=0.0):
+        """
+        goto a local NorthEastDown position relative to current position in meters (if already in GUIDED mode)
+        """
+        msg = PprzMessage("datalink", "GUIDED_SETPOINT_NED")
+        msg['ac_id'] = self.ac_id
+        msg['flags'] = 0x0D
+        msg['x'] = north
+        msg['y'] = east
+        msg['z'] = down
+        msg['yaw'] = yaw
+        print("goto NED relative: %s" % msg)
+        ros_msg = self.converter.pprz2ros(0, msg)
+        self.pub.publish(ros_msg)
+
+
+def test():
+    ac_id = rospy.get_param('/pprzros_demo/ac_id', 1)
+
+    rospy.init_node("pprzros_demo", anonymous=True)
+    try:
+        g = PprzGuided(ac_id, verbose=True)
+        # "manual" control
+        g.goto_ned(north=0.0, east=0.0, down=-3.0)
+        time.sleep(1)
+        g.goto_ned(north=0.0, east=5.0, down=-3.0)
+        time.sleep(1)
+        g.goto_ned(north=5.0, east=5.0, down=-3.0)
+        time.sleep(1)
+        g.goto_ned_relative(north=-2.0, east=-2.0, down=-2.0)
+        time.sleep(1)
+        # "navigation" control
+        g.start_nav()
+        g.set(0.0, 0.0, -3.0)
+        g.set(0.0, 5.0, -3.0)
+        g.set(5.0, 5.0, -3.0)
+        g.set(0.0, 0.0, -2.0)
+        g.stop_nav()
+        # "remote" control
+        # use rostopic to send test message:
+        #   rostopic pub /pos_setpoint geometry_msgs/Point '{x: 2.0, y: 5.0, z: -5.0}'
+        g.start_remote()
+        rospy.spin()
+    except KeyboardInterrupt or rospy.ROSInterruptException:
+        print("Stopping on request")
+    g.shutdown()
+
+
+if __name__ == '__main__':
+    test()
+

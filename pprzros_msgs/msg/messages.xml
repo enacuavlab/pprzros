@@ -1040,6 +1040,7 @@
             <field name="HEADER" type="m_HEADER"></field>
             <field name="HEIGHT" type="uint32"></field>
             <field name="WIDTH" type="uint32"></field>
+            <field name="ENCODING" type="string"></field>
             <field name="IS_BIGENDIAN" type="uint8"></field>
             <field name="STEP" type="uint32"></field>
             <field name="DATA" type="uint8[]"></field>
@@ -1152,7 +1153,7 @@
             <field name="FIELDS" type="m_POINT_FIELD[]"></field>
             <field name="IS_BIGENDIAN" type="bool"></field>
             <field name="POINT_STEP" type="uint32"></field>
-            <field name="ROW_STEP" type="uint32"></field>+
+            <field name="ROW_STEP" type="uint32"></field>
             <field name="DATA" type="uint8[]"></field>
             <field name="IS_DENSE" type="bool"></field>
         </message>
