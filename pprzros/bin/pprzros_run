@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 
-from pprzros.rosudp import RosUdpMessagesInterface
+#from pprzros.rosudp import RosUdpMessagesInterface
 from pprzros.rosudp2 import RosUdpMessagesInterface
-from pprzros.rosivy import RosIvyMessagesInterface
-from pprzros.rosserial import RosSerialMessagesInterface
+#from pprzros.rosivy import RosIvyMessagesInterface
+#from pprzros.rosserial import RosSerialMessagesInterface
 
 if __name__ == '__main__':
     pprzros = RosUdpMessagesInterface()
