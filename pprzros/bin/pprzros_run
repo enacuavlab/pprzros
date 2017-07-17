@@ -6,25 +6,69 @@
 # Change methods name to remove '_'
 
 import sys
+import argparse
+
 
 if __name__ == '__main__':
     interface_type = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    
+    # Common arguments
+    parser.add_argument("-v", "--verbose", help="Verbose mode", dest='verbose', default=False)
+    parser.add_argument("-c", "--msg_class", 
+                        help="Class of incoming messages", 
+                        dest='msg_class', default='telemetry')
     
     if interface_type == 'udp':
-        from pprzros.rosudp2 import RosUdpMessagesInterface
-        pprzros = RosUdpMessagesInterface()
+        from pprzros.rosudp import RosUdpMessagesInterface
+        from pprzlink.udp import *
+        parser.add_argument("-d", "--destination", 
+                            help="UDP destination adress", dest='destination', 
+                            default='127.0.0.1')      
+        parser.add_argument("-up", "--uplink_port", 
+                            help="Uplink port", dest='uplink', 
+                            default=UPLINK_PORT, type=int)
+        parser.add_argument("-dp", "--downlink_port", 
+                            help="Downlink port", dest='downlink',
+                            default=DOWNLINK_PORT, type=int)
+        args, unknown = parser.parse_known_args()
+        pprzros = RosUdpMessagesInterface(args.destination, args.verbose, 
+                                          args.uplink, args.downlink, args.msg_class)
         print 'Using UDP interface'
+        
     elif interface_type == 'serial':
         from pprzros.rosserial import RosSerialMessagesInterface
-        pprzros = RosSerialMessagesInterface()
+        parser.add_argument("-d", "--destination", 
+                            help="Serial device adress", dest='destination', 
+                            default='/dev/ttyUSB0')
+        parser.add_argument("-br", "--baudrate", 
+                            help="Connexion baudrate", dest='baudrate', 
+                            default='115200', type=int)
+        args, unknown = parser.parse_known_args()
+        pprzros = RosSerialMessagesInterface(args.verbose, args.destination, args.baudrate, args.msg_class)
         print 'Using Serial interface'
+        
     elif interface_type == 'ivy':
         from pprzros.rosivy import RosIvyMessagesInterface
-        pprzros = RosIvyMessagesInterface() 
-        print 'Using Ivy interface'  
+        from pprzlink.ivy import *
+        parser.add_argument("-d", "--destination", 
+                            help="Ivy bus adress", dest='destination', 
+                            default=IVY_BUS)        
+        parser.add_argument("-ag", "--agent_name", 
+                            help="Ivy agent name", dest='agent_name',
+                            default='None')
+        parser.add_argument("-s", "--start_ivy", 
+                            help="Starts Ivy", dest='start_ivy',
+                            default='True')
+        args, unknown = parser.parse_known_args()
+        pprzros = RosIvyMessagesInterface(args.agent_name, args.start_ivy, args.verbose, args.destination)
+        print 'Using Ivy interface'
+          
     else:
         print 'Unknown interface type: {}. Using UDP interface.'.format(interface_type)
+        from pprzros.rosudp import RosUdpMessagesInterface
         pprzros = RosUdpMessagesInterface()
         
     pprzros.run()
+
 

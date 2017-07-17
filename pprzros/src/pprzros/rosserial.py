@@ -13,9 +13,9 @@ from pprzlink.serial import SerialMessagesInterface
 
 
 class RosSerialMessagesInterface(RosMessagesInterface):
-    def __init__(self, serial_device='/dev/ttyUSB0'):
+    def __init__(self, verbose=False, device='/dev/ttyUSB0', baudrate=115200, msg_class='telemetry'):
+        self.interface = SerialMessagesInterface(self.to_ros, verbose, device, baudrate, msg_class)
         RosMessagesInterface.__init__(self)
-        self.interface = SerialMessagesInterface(callback=self.to_ros, device=serial_device)
 
     def from_ros(self, ros_msg):
         pprz_msg = self.converter.ros2pprz(ros_msg)

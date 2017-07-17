@@ -1,4 +1,4 @@
 <launch>
     <node pkg="pprzros" type="pprzros_run" name="pprzros" args="ivy" output="screen"/>
-    <node pkg="rostopic" type="rostopic" name="test_pprz2ros" args="echo /to_ros" output="screen"/>
+    <node pkg="rostopic" type="rostopic" name="test_pprz2ros" args="echo -c /to_ros" output="screen"/>
 </launch>

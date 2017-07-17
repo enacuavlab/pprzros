@@ -10,12 +10,14 @@ sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python')
 from pprzros.rosinterface import RosMessagesInterface
 from pprzros_msgs.msg import PprzrosMsg
 from pprzlink.ivy import IvyMessagesInterface
+from pprzlink.ivy import IVY_BUS
 
 
 class RosIvyMessagesInterface(RosMessagesInterface):
-    def __init__(self):
+    def __init__(self, agent_name=None, start_ivy=True, verbose=False, ivy_bus=IVY_BUS):
+        #print("Kikou %s" % ivy_bus)
+        self.interface = IvyMessagesInterface(agent_name, start_ivy, verbose, ivy_bus)
         RosMessagesInterface.__init__(self)
-        self.interface = IvyMessagesInterface()
         self.interface.subscribe(callback=self.to_ros)
 
     def from_ros(self, ros_msg):
