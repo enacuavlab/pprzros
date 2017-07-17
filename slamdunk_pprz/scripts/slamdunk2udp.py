@@ -43,18 +43,41 @@ import math
 import time
 import numpy as np
 from datetime import datetime
+from subprocess import call
+import traceback
+
+from scapy.all import srp1,Ether,ARP,conf
 
 rospack = rospkg.RosPack()
 PPRZROS_BASE = rospack.get_path('pprzros')
 sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python')
 sys.path.append(PPRZROS_BASE + '/src/pprzros')
 
-import rosivy
+import rosudp2
 from pprzlink.message import PprzMessage
 
 min_velocity_samples = 4
+drone_id = 10
+
+class Light(object):
+    def __init__(self):
+        self.hasBlinked = False
+
+    def blink(self, n, timer, leds):
+        timer /= float(1000)
+        for i in range(n):
+            for led in leds:
+                with open("/sys/class/leds/"+led+"/brightness", "w") as bright:
+                   bright.write("1")
+            time.sleep(timer)
+            for led in leds:
+                with open("/sys/class/leds/"+led+"/brightness", "w") as bright:
+                   bright.write("0")
+            time.sleep(timer)
+        return 0
 
 class Drone(object):
+    address = ''
     id = 0
     x = 0
     y = 0
@@ -160,10 +183,11 @@ def callback(pose):
                         np.int32(drone.speed_z),
                         np.uint32(tow),
                         np.int32(heading)])
+    udp.interface.send(message, drone.id, drone.address)
 
-    # print message
-    ivy.from_ros(ivy.converter.pprz2ros(10, message))
-
+    if not lights.hasBlinked:
+        lights.blink(3, 400, ["front:left:blue", "front:right:blue", "rear:left:blue", "rear:right:blue"])
+        lights.hasBlinked = True
 
 def listener():
 
@@ -180,7 +204,23 @@ def listener():
     rospy.spin()
 
 if __name__ == '__main__':
-    freq_transmit = 30.
-    ivy = rosivy.RosIvyMessagesInterface()
-    drone = Drone(10)
-    listener()
+	freq_transmit = 30.
+	udp = rosudp2.RosUdpMessagesInterface()
+	drone = Drone(drone_id)
+	lights = Light()
+
+	# Search drone's IP address (7.5s runtime)
+	conf.verb = 0
+	ans = srp1(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst = '192.168.43.0/27'), timeout = 0.5, iface='usb1',inter=0.1)
+	try:
+		drone.address = ans[0][1].sprintf(r"%ARP.psrc%")
+		lights.blink(1, 1500, ["front:left:green", "front:right:green", "rear:left:green", "rear:right:green"])
+	except Exception as e:
+		lights.blink(2, 1000, ["front:left:red", "front:right:red", "rear:left:red", "rear:right:red"])
+		traceback.print_exc()
+		exit(1)
+
+	listener()
+
+    
+

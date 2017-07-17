@@ -24,6 +24,7 @@ if __name__ == '__main__':
         print 'Using Ivy interface'  
     else:
         print 'Unknown interface type: {}. Using UDP interface.'.format(interface_type)
+        from pprzros.rosudp2 import RosUdpMessagesInterface
         pprzros = RosUdpMessagesInterface()
         
     pprzros.run()
