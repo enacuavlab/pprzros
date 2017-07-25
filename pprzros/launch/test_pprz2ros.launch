@@ -3,6 +3,5 @@
     <!--node pkg="pprzros" type="pprzros_run" name="pprzros" args="ivy" output="screen"/-->
     <!--node pkg="pprzros" type="pprzros_run" name="pprzros" args="udp -d 192.168.1.1" output="screen"/-->
     <node pkg="pprzros" type="pprzros_run" name="pprzros" args="serial -d /dev/ttyUSB0 -b 57600" output="screen"/>
-    <node pkg="pprzros" type="pprzros_run" name="pprzros2" args="" output="screen"/>
     <node pkg="rostopic" type="rostopic" name="test_pprz2ros" args="echo -c /to_ros" output="screen"/>
 </launch>
