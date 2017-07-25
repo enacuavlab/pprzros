@@ -2,15 +2,18 @@
 
 # For testing:
 # rostopic echoc - --filter "m.msg_name=='PONG'" /to_ros
-# TODO
-# Change methods name to remove '_'
 
 import sys
 import argparse
 
 
 if __name__ == '__main__':
-    interface_type = sys.argv[1]
+    try:
+        interface_type = sys.argv[1]
+    except:
+        print("usage: pprzros_run interface_type [options]")
+        sys.exit(2)
+        
     parser = argparse.ArgumentParser()
     
     # Common arguments
@@ -42,7 +45,7 @@ if __name__ == '__main__':
                             help="Serial device adress", dest='destination', 
                             default='/dev/ttyUSB0')
         parser.add_argument("-br", "--baudrate", 
-                            help="Connexion baudrate", dest='baudrate', 
+                            help="Connexion bit rate", dest='baudrate', 
                             default='115200', type=int)
         args, unknown = parser.parse_known_args()
         pprzros = RosSerialMessagesInterface(args.verbose, args.destination, args.baudrate, args.msg_class)
@@ -65,7 +68,7 @@ if __name__ == '__main__':
         print 'Using Ivy interface'
           
     else:
-        print 'Unknown interface type: {}. Using UDP interface.'.format(interface_type)
+        print "Unknown interface type: {}. Should be udp, serial or ivy.\nUsing UDP interface.".format(interface_type)
         from pprzros.rosudp import RosUdpMessagesInterface
         pprzros = RosUdpMessagesInterface()
         
