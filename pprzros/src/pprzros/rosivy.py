@@ -15,10 +15,10 @@ from pprzlink.ivy import IVY_BUS
 
 class RosIvyMessagesInterface(RosMessagesInterface):
     def __init__(self, agent_name=None, start_ivy=True, verbose=False, ivy_bus=IVY_BUS):
-        #print("Kikou %s" % ivy_bus)
         self.interface = IvyMessagesInterface(agent_name, start_ivy, verbose, ivy_bus)
         RosMessagesInterface.__init__(self)
-        self.interface.subscribe(callback=self.to_ros)
+        # only subscribe to telemetry messages eg. starting with AC_ID
+        self.interface.subscribe(callback=self.to_ros, regex_or_msg='(^[0-9]+ .*)')
 
     def from_ros(self, ros_msg):
         pprz_msg = self.converter.ros2pprz(ros_msg)
