@@ -16,11 +16,11 @@ from pprzlink.message import PprzMessage
 # Abstract class, not usable as is
 class RosMessagesInterface():
     def __init__(self):
-        self.sub = rospy.Subscriber('from_ros', PprzrosMsg, self.from_ros)
-        self.pub = rospy.Publisher('to_ros', PprzrosMsg, queue_size=10)
+        self.sub = rospy.Subscriber('pprzros/from_ros', PprzrosMsg, self.from_ros)
+        self.pub = rospy.Publisher('pprzros/to_ros', PprzrosMsg, queue_size=10)
         self.converter = PprzRosConverter()
 
-        rospy.init_node('pprzros_node', anonymous=True)
+        rospy.init_node('pprzros_interface_node', anonymous=True)
         self.rate = rospy.Rate(10) # 10 Hz
 
     def stop(self):

@@ -22,7 +22,7 @@ class RosIvyMessagesInterface(RosMessagesInterface):
 
     def from_ros(self, ros_msg):
         pprz_msg = self.converter.ros2pprz(ros_msg)
-        self.interface.send(pprz_msg)
+        self.interface.send(pprz_msg)    
     
     def to_ros(self, sender_id, pprz_msg):
         ros_msg = self.converter.pprz2ros(sender_id, pprz_msg)

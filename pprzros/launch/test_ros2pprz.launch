@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <!--node pkg="pprzros" type="pprzros_run" name="pprzros" args="ivy" output="screen"/-->
-    <node pkg="pprzros" type="pprzros_run" name="pprzros" args="udp -d 192.168.1.1" output="screen"/>
-    <!--node pkg="pprzros" type="pprzros_run" name="pprzros" args="serial -d /dev/ttyUSB0 -b 57600" output="screen"/-->
-    <node pkg="rostopic" type="rostopic" name="send_test_ping" args="pub -r 10 /from_ros pprzros_msgs/PprzrosMsg '{header: auto, version: 1, len: 0, class_name: 'datalink', comp_id: 0, msg_name: 'PING', sender_id: 0, receiver_id: 201, checksum: 0, data: []}'" output="screen"/>
-    <node pkg="rostopic" type="rostopic" name="echo_test_pong" args="echo -c /to_ros" output="screen"/>
-</launch>
