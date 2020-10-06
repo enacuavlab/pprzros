@@ -38,6 +38,7 @@
 
 import rospy, rospkg
 import sys
+from os import getenv
 from geometry_msgs.msg import PoseStamped
 import math
 import time
@@ -50,8 +51,13 @@ from scapy.all import srp1,Ether,ARP,conf
 
 rospack = rospkg.RosPack()
 PPRZROS_BASE = rospack.get_path('pprzros')
-sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python')
+PPRZ_HOME = getenv("PAPARAZZI_HOME")
 sys.path.append(PPRZROS_BASE + '/src/pprzros')
+if PPRZ_HOME is not None:
+    sys.path.append(PPRZ_HOME + '/var/lib/python')
+else:
+    sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v2.0/python')
+
 
 import rosudp2
 from pprzlink.message import PprzMessage

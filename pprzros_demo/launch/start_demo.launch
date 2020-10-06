@@ -3,11 +3,12 @@
 	<!-- demo launch file-->
 	<arg name="ac_id" />
 
-	<node pkg="pprzros" type="pprzros_run" name="pprzros" output="screen"/>
+	<node pkg="pprzros" type="pprzros_run" name="pprzros" args="ivy" output="screen">
+	</node>
 	<node pkg="pprzros_demo" type="guided_mode_demo" name="pprzros_demo" clear_params="true" output="screen">
 		<param name="ac_id" value="$(arg ac_id)"/>
 	</node>
-	<!--node pkg="rostopic" type="rostopic" name="topic_from_pprz" args="echo /to_ros" output="screen"/-->
-	<node pkg="rostopic" type="rostopic" name="topic_to_pprz" args="echo /from_ros" output="screen"/>
+	<!--node pkg="rostopic" type="rostopic" name="topic_from_pprz" args="echo pprzros/to_ros" output="screen"/-->
+	<node pkg="rostopic" type="rostopic" name="topic_to_pprz" args="echo pprzros/from_ros" output="screen"/>
 
 </launch>

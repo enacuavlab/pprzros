@@ -37,7 +37,7 @@ if __name__ == '__main__':
         args, unknown = parser.parse_known_args()
         pprzros = RosUdpMessagesInterface(args.destination, args.verbose, 
                                           args.uplink, args.downlink, args.msg_class)
-        print 'Using UDP interface'
+        print('Using UDP interface')
         
     elif interface_type == 'serial':
         from pprzros.rosserial import RosSerialMessagesInterface
@@ -49,7 +49,7 @@ if __name__ == '__main__':
                             default='115200', type=int)
         args, unknown = parser.parse_known_args()
         pprzros = RosSerialMessagesInterface(args.verbose, args.device, args.baudrate, args.msg_class)
-        print 'Using Serial interface'
+        print('Using Serial interface')
         
     elif interface_type == 'ivy':
         from pprzros.rosivy import RosIvyMessagesInterface
@@ -62,10 +62,10 @@ if __name__ == '__main__':
                             default='pprzros')
         args, unknown = parser.parse_known_args()
         pprzros = RosIvyMessagesInterface(args.name, True, args.verbose, args.ivy_bus)
-        print 'Using Ivy interface'
+        print('Using Ivy interface')
           
     else:
-        print "Unknown interface type '{}': select serial, udp or ivy".format(interface_type)
+        print("Unknown interface type '{}': select serial, udp or ivy".format(interface_type))
         sys.exit(1)
         
     pprzros.run()

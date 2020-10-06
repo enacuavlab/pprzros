@@ -21,14 +21,19 @@
 import rospy
 import pprzros
 import time
-import thread
 import threading
+from os import getenv
 
 import rospkg
 import sys
 rospack = rospkg.RosPack()
-PPRZROS_BASE = rospack.get_path('pprzros_demo')
-sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v1.0/python')
+
+PPRZ_HOME = getenv("PAPARAZZI_HOME")
+if PPRZ_HOME is not None:
+    sys.path.append(PPRZ_HOME + '/var/lib/python')
+else:
+    PPRZROS_BASE = rospack.get_path('pprzros')
+    sys.path.append(PPRZROS_BASE + '/../pprzlink/lib/v2.0/python')
 
 from geometry_msgs.msg import Point
 from pprzlink.message import PprzMessage
@@ -49,9 +54,9 @@ class PprzGuided(object):
         self.verbose = verbose
         self.converter = PprzRosConverter()
         # publish to 'from_ros' topic for pprzros node
-        self.pub = rospy.Publisher('from_ros', PprzrosMsg, queue_size=10)
+        self.pub = rospy.Publisher('pprzros/from_ros', PprzrosMsg, queue_size=10)
         # subscribe to 'to_ros' topic from pprzros node
-        self.sub = rospy.Subscriber('to_ros', PprzrosMsg, self.reached)
+        self.sub = rospy.Subscriber('pprzros/to_ros', PprzrosMsg, self.reached)
 
     def shutdown(self):
         self.stop_nav()
@@ -62,10 +67,11 @@ class PprzGuided(object):
         """
         try:
             self.nav = True
-            thread.start_new_thread(self.navigate, ())
+            navThread = threading.Thread(target=self.navigate)
+            navThread.start()
         except:
             self.nav = False
-            fault("Error: Unable to start thread")
+            print("Error: Unable to start thread")
 
     def stop_nav(self):
         """

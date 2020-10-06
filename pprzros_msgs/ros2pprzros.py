@@ -56,9 +56,9 @@ def add_msgs(files):
             if good_line:
                 for file in files:
                     if file != "PprzrosMsg":
-                        print "  " + file + ".msg"
+                        print("  " + file + ".msg")
             good_line = False
-        print line,
+        print(line)
 
     call(["catkin_make", "-j8", "--pkg", "pprzros", "pprzros_msgs", "-C", "../.."])
 
@@ -118,12 +118,12 @@ def to_PprzrosMsg(data):
         return 0
     parsed = []
     rec_parser(data, parsed)
-    print parsed
+    print(parsed)
     #TODO change the "parse" list of tuples into uint8[] for data field of PprzrosMsg
     return 0
 
 def to_Ros(data):
-    print data
+    print(data)
     #TODO ?
     return 0
 
